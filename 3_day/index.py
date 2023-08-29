@@ -14,6 +14,9 @@ def run():
     rindex = mi_texto.rindex("a") # Busca de derecha a izquierda. 
     print(rindex)
 
+    redes = ["YouTube", "Facebook", "Twitter", "Whatsapp"]
+    print(redes.sort())
+
 
 if __name__ == '__main__':
     run()
