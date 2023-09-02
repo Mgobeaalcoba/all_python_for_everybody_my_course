@@ -7,9 +7,7 @@ def devoler_distintos(num1,num2,num3):
     elif sum(lista) < 10:
         return min(lista)
     else:
-        print(lista)
         lista.sort()
-        print(lista)
         return lista[1]
     
 lista = [1,5,10]
@@ -23,15 +21,51 @@ print(devoler_distintos(*lista3))
 # Ejercicio 2
 
 def devolver_letras(palabra):
-    print(palabra)
     my_list = [letra for letra in palabra]
-    print(f"primera lista: {my_list}")
     my_set = set(my_list)
-    print(f"primer set: {my_set}")
     my_list = list(my_set)
-    print(f"segunda lista: {my_list}")
     my_list.sort()
-    print(f"lista ordenada: {my_list}")
     return my_list
 
 print(devolver_letras("ornitorrinco"))
+
+# Ejercicio 3
+
+from random import randint
+
+def doble_cero(*args):
+    match = False
+    for i in range(len(args)-1):
+        if args[i] == 0 and args[i+1] == 0:
+            match = True
+            break
+    return match
+
+my_list = [randint(0,5) for i in range(randint(5,20))]
+print(my_list)
+print(doble_cero(*my_list))
+
+# Ejercicio 4
+
+from random import randint
+
+def contar_primos(numero):
+    primos = []
+    it_is_prime = True
+    for num in range(2,numero):
+        for num2 in range(2,num):
+            if num % num2 == 0 and num != num2:
+                it_is_prime = False
+                break
+        if it_is_prime == True:
+            primos.append(num)
+        it_is_prime = True
+    return len(primos), primos
+
+my_num = randint(2,100)
+print(f"El numero a enviar a la funcion es: {my_num}. ")
+count_primos, list_primos = contar_primos(my_num)
+print(count_primos)
+print(list_primos)        
+
+
