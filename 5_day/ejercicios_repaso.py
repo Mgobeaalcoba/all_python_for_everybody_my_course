@@ -23,6 +23,15 @@ print(devoler_distintos(*lista3))
 # Ejercicio 2
 
 def devolver_letras(palabra):
-    return list(set(palabra.split(""))).sort()
+    print(palabra)
+    my_list = [letra for letra in palabra]
+    print(f"primera lista: {my_list}")
+    my_set = set(my_list)
+    print(f"primer set: {my_set}")
+    my_list = list(my_set)
+    print(f"segunda lista: {my_list}")
+    my_list.sort()
+    print(f"lista ordenada: {my_list}")
+    return my_list
 
 print(devolver_letras("ornitorrinco"))
