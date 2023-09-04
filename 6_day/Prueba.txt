@@ -1,3 +1,4 @@
 Soy la primera linea
-¡Vaya! ¡Yo soy la segunda!
+ï¿½Vaya! ï¿½Yo soy la segunda!
 He quedado tercera
+Soy el nuevo texto
