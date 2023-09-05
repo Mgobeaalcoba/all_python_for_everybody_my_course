@@ -13,3 +13,5 @@ my_file = open("texto.txt", "r")
 my_lines = my_file.readlines()
 print(my_lines[1])
 my_file.close()
+
+

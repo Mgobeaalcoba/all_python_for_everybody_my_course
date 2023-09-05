@@ -1,0 +1,85 @@
+<mxfile host="65bd71144e">
+    <diagram id="2YyP3FJscFOZdUtt6BUY" name="Page-1">
+        <mxGraphModel dx="1386" dy="792" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1920" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="4" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="2" target="3">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2" value="Bienvenida al usuario" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="540" y="58" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="3" target="5">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="Mostrar ruta de acceso al directorio con recetas" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="540" y="148" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="5" target="7">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="Contar cuantas recetas hay dentro del directorio" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+                    <mxGeometry x="540" y="248" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="179" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="7" target="178">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="183" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="7" target="182">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="188" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="7" target="187">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="190" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="7" target="189">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="194" style="edgeStyle=none;html=1;" edge="1" parent="1" source="7" target="193">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="196" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="7" target="195">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="Elegir opciones (de 1 a 6)" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+                    <mxGeometry x="540" y="338" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="181" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="178" target="180">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="178" value="Op 1: ¿Que categoría elige? Carnes, Ensaladas, etc" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+                    <mxGeometry x="60" y="448" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="180" value="Ofrece Recetas disponibles y le pregunta cual queire leer y la muestra" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+                    <mxGeometry x="60" y="538" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="186" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="182" target="184">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="182" value="Op 2: ¿A que categoria quiere crearle una receta?" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+                    <mxGeometry x="280" y="448" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="184" value="Crea nombre y contenido de esa receta" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+                    <mxGeometry x="280" y="538" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="187" value="Op 3: Crea una nueva categoria (Nueva carpeta)" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+                    <mxGeometry x="540" y="448" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="192" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="189" target="191">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="189" value="Op 4: ¿Que categoría elige?" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+                    <mxGeometry x="770" y="448" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="191" value="Ofrece las recetas disponibles para eliminar" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+                    <mxGeometry x="770" y="538" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="193" value="Op 5: Elimina una de las categorias existentes" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+                    <mxGeometry x="1030" y="448" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="195" value="Op 6: Finaliza el programa" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+                    <mxGeometry x="540" y="658" width="120" height="60" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
