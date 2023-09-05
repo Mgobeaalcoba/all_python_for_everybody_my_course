@@ -1,4 +1,23 @@
 from pathlib import Path
+import os
+
+base = Path.home()
+# C:\Users\mgobea\Documents\develop\python_total\6_day\Recetas
+guia = Path(base, "Documents", "develop", "python_total", "6_day", "Recetas", "Carnes")
+
+elementos = os.listdir(guia)
+os.chdir(guia)
+current_directory = os.getcwd()
+
+print(current_directory)
+
+print("Que categoría de recetas desea seleccionar: ")
+for indice, elemento in enumerate(elementos):
+    print(f"[{indice + 1}] - {elemento}")
+option = int(input("Opcion seleccionada: "))
+while option not in range(1,len(elementos)):
+    print("Seleccionó una opción NO valida... Vuelva a intentarlo. ")
+    option = int(input("Opcion seleccionada: "))
 
 guia = Path("Barcelona", "Sagrada_Familia")
 print(guia) # Barcelona\Sagrada_Familia
