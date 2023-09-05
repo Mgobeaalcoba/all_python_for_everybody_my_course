@@ -21,7 +21,7 @@ def run():
                 chosen_category : str = select_category()
                 change_directory(chosen_category)
                 chosen_recete : str = select_recete(chosen_category)
-                print_recete(chosen_recete)
+                there_are_recepes(chosen_recete, chosen_option)
             elif chosen_option == 2:
                 return_to_home()
                 chosen_category : str = select_category()
@@ -35,7 +35,7 @@ def run():
                 chosen_category : str = select_category()
                 change_directory(chosen_category)
                 chosen_recete : str = select_recete(chosen_category)
-                delete_recete(chosen_recete)
+                there_are_recepes(chosen_recete, chosen_option)
             else:
                 return_to_home()
                 delete_category()
@@ -88,6 +88,17 @@ def count_recipes(directory) -> int:
     return count
 
 
+def there_are_recepes(content, chosen_option) -> None:
+    if content == "":
+        print("No tenemos recetas disponibles en la categoría elegida")
+        input("Presione enter para terminar. ")
+    else:
+        if chosen_option == 1:
+            print_recete(content)
+        else:
+            delete_recete(content)
+
+
 def show_count_recepes(count) -> None:
     print(f"En la actualidad contamos con {count} recetas disponibles. ")
     print()
@@ -132,9 +143,11 @@ def select_recete(category) -> str:
     current_directory = Path(os.getcwd())
     recetes = os.listdir(current_directory)
 
-    option = select_options("receta", recetes)
-
-    return recetes[option - 1]
+    if len(recetes) < 1:
+        return ""
+    else:
+        option = select_options("receta", recetes)
+        return recetes[option - 1]
 
 
 def print_recete(recete) -> None:
