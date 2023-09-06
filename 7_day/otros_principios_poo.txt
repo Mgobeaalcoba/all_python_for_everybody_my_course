@@ -1,0 +1,12 @@
+Cohesion: https://escueladirecta-blog.blogspot.com/2021/09/cohesion-pilares-de-la-programacion.html
+
+Acoplamiento: https://escueladirecta-blog.blogspot.com/2021/10/acoplamiento-pilares-de-la-programacion.html
+
+Abstracción: https://escueladirecta-blog.blogspot.com/2021/10/abstraccion-pilares-de-la-programacion.html
+
+Encapsulamiento: https://escueladirecta-blog.blogspot.com/2021/10/encapsulamiento-pilares-de-la.html
+
+
+
+
+
