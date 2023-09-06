@@ -49,7 +49,7 @@ class Ornitorrinco(Ave, Reptil, Pez, Mamifero):
 
 # Ejercicio 3:
 
-class Padre():
+class Padre:
     color_ojos = "marrón"
     tipo_pelo = "rulos"
     altura = "media"
