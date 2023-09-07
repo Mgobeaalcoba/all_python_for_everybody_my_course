@@ -1,0 +1,156 @@
+Es una biblioteca de Python que analiza tu código e informa sobre posibles problemas. 
+Se ejecuta por consola, con previa instalación
+
+Pylint es un verificador de código, errores y calidad para
+Python, siguiendo el estilo recomendado por PEP 8, la guía de
+estilo de Python. Es de gran utilidad en el trabajo en equipo
+
+pip install pylint
+
+Recordar instalar las dependencias dentro de nuestro virtual environment y no en python global
+
+Para eso previamente se debe crear un venv:
+
+python -m venv venv
+
+y luego activarlo:
+
+venv/Scripts/activate --> Windows
+
+source /venv/bin/activate --> Linux/Mac
+
+Ejecutar desde la consola
+
+ruta> pylint modulo1.py -r y
+
+Al ejecutarse, Pylint devuelve un reporte con las
+características que fueron evaluadas, errores y
+puntuaciones parciales
+
+Your code has been rated at 6.67/10
+
+A mayor puntaje, mayor será la calidad de tu código.
+Un umbral aceptable será >= 7.00/10
+
+Ejemplo del análisis realizado sobre el archivo de día 8 "manejo de errores":
+
+C:\Users\mgobea\Documents\develop\python_total\8_day(main -> origin)
+(venv) λ pylint manejo_de_errores.py
+************* Module manejo_de_errores
+manejo_de_errores.py:35:47: C0303: Trailing whitespace (trailing-whitespace)
+manejo_de_errores.py:64:0: C0305: Trailing newlines (trailing-newlines)
+manejo_de_errores.py:14:0: C0116: Missing function or method docstring (missing-function-docstring)
+manejo_de_errores.py:15:4: C0103: Variable name "n1" doesn't conform to snake_case naming style (invalid-name)
+manejo_de_errores.py:16:4: C0103: Variable name "n2" doesn't conform to snake_case naming style (invalid-name)
+manejo_de_errores.py:27:0: W0702: No exception type(s) specified (bare-except)
+manejo_de_errores.py:54:0: C0116: Missing function or method docstring (missing-function-docstring)
+
+-----------------------------------
+Your code has been rated at 7.74/10
+
+Si el reporte lo pido sumando los flags de "-r y" al final entonces se ve así: 
+
+C:\Users\mgobea\Documents\develop\python_total\8_day(main -> origin)
+(venv) λ pylint manejo_de_errores.py -r y
+************* Module manejo_de_errores
+manejo_de_errores.py:35:47: C0303: Trailing whitespace (trailing-whitespace)
+manejo_de_errores.py:64:0: C0305: Trailing newlines (trailing-newlines)
+manejo_de_errores.py:14:0: C0116: Missing function or method docstring (missing-function-docstring)
+manejo_de_errores.py:15:4: C0103: Variable name "n1" doesn't conform to snake_case naming style (invalid-name)
+manejo_de_errores.py:16:4: C0103: Variable name "n2" doesn't conform to snake_case naming style (invalid-name)
+manejo_de_errores.py:27:0: W0702: No exception type(s) specified (bare-except)
+manejo_de_errores.py:54:0: C0116: Missing function or method docstring (missing-function-docstring)
+
+
+Report
+======
+31 statements analysed.
+
+Statistics by type
+------------------
+
++---------+-------+-----------+-----------+------------+---------+
+|type     |number |old number |difference |%documented |%badname |
++=========+=======+===========+===========+============+=========+
+|module   |1      |1          |=          |100.00      |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|class    |0      |NC         |NC         |0           |0        |
++---------+-------+-----------+-----------+------------+---------+
+|method   |0      |NC         |NC         |0           |0        |
++---------+-------+-----------+-----------+------------+---------+
+|function |2      |2          |=          |0.00        |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+
+
+
+66 lines have been analyzed
+
+Raw metrics
+-----------
+
++----------+-------+------+---------+-----------+
+|type      |number |%     |previous |difference |
++==========+=======+======+=========+===========+
+|code      |36     |54.55 |NC       |NC         |
++----------+-------+------+---------+-----------+
+|docstring |11     |16.67 |NC       |NC         |
++----------+-------+------+---------+-----------+
+|comment   |9      |13.64 |NC       |NC         |
++----------+-------+------+---------+-----------+
+|empty     |10     |15.15 |NC       |NC         |
++----------+-------+------+---------+-----------+
+
+
+
+Duplication
+-----------
+
++-------------------------+------+---------+-----------+
+|                         |now   |previous |difference |
++=========================+======+=========+===========+
+|nb duplicated lines      |0     |0        |0          |
++-------------------------+------+---------+-----------+
+|percent duplicated lines |0.000 |0.000    |=          |
++-------------------------+------+---------+-----------+
+
+
+
+Messages by category
+--------------------
+
++-----------+-------+---------+-----------+
+|type       |number |previous |difference |
++===========+=======+=========+===========+
+|convention |6      |6        |6          |
++-----------+-------+---------+-----------+
+|refactor   |0      |0        |0          |
++-----------+-------+---------+-----------+
+|warning    |1      |1        |1          |
++-----------+-------+---------+-----------+
+|error      |0      |0        |0          |
++-----------+-------+---------+-----------+
+
+
+
+Messages
+--------
+
++---------------------------+------------+
+|message id                 |occurrences |
++===========================+============+
+|missing-function-docstring |2           |
++---------------------------+------------+
+|invalid-name               |2           |
++---------------------------+------------+
+|trailing-whitespace        |1           |
++---------------------------+------------+
+|trailing-newlines          |1           |
++---------------------------+------------+
+|bare-except                |1           |
++---------------------------+------------+
+
+
+
+
+------------------------------------------------------------------
+Your code has been rated at 7.74/10 (previous run: 7.74/10, +0.00)

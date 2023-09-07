@@ -1,7 +1,7 @@
 from .persona import Persona
 
 class Cliente(Persona):
-    def __init__(self, nombre, apellido, num_cuenta, balance) -> None:
+    def __init__(self, nombre: str, apellido: str, num_cuenta: int, balance: int) -> None:
         super().__init__(nombre,apellido)
         self.num_cuenta = num_cuenta
         self.balance = balance
@@ -17,10 +17,10 @@ balance: {self.balance}
 
 """)
     
-    def depositar(self, monto):
+    def depositar(self, monto: int):
         self.balance += monto 
 
-    def retirar(self, monto):
+    def retirar(self, monto: int):
         if (self.balance - monto) < 0:
             print("No es posible retirar ese monto dado que su saldo es insuficiente. ")
             input()

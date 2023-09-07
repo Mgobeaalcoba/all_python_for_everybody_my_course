@@ -1,0 +1,18 @@
+modulo = archivo python terminado .py 
+paquete = carpeta que contiene archivos .py. Deben llevar necesariamente un file (vacio alcanza) llamado __init__.py
+
+para importar elementos de un paquete o modulo podemos hacer:
+
+import <paquete>
+import <paquete.modulo>
+from <paquete> import *
+from <paquete.modulo> import *
+from <paquete.modulo> import <function>, <clase>, <variable>
+from <paquete.subpaqute> import <modulo>
+
+Si importe el modulo completo, para usar sus funciones, variables o clases deberia hacerlo con una sintaxis similar: 
+
+<modulo>.<function>()
+<modulo>.<class>()
+
+Si importe la función, clase o variable directamente entonces solo con llamarla (sin el modulo delante) va a alcanzar para utilizarla. 

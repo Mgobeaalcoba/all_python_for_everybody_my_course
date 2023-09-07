@@ -1,0 +1,16 @@
+PyPi (Python Package Index) es el repositorio de
+referencia para hallar paquetes desarrollados por la
+comunidad.
+
+Si ya conoces el nombre del módulo que quieres instalar, puedes
+obtenerlo de PyPi directamente desde la consola:
+
+pip install <modulo>
+
+También podrás actualizar los módulos que ya tengas instalados
+añadiendo --upgrade luego del nombre del paquete:
+
+pip install <modulo> --upgrade
+
+No dejes de utilizar Google para investigar nuevos
+paquetes y sus funcionalidades
