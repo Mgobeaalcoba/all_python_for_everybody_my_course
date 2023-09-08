@@ -19,13 +19,66 @@ print(my_walk) # <generator object _walk at 0x0000022B4EB25010>
 
 # Voy a recorrer el generador que tiene todo el contenido de mi ruta actual: 
 
+for carpeta, subcarpeta, archivo in my_walk:
+    print(f"En la carpeta: {carpeta}")
+    print(f"Las subcarpetas son:")
+    for sub in subcarpeta:
+        print(f"\t{sub}")
+    print("Los archivos son:")
+    for arch in archivo:
+        print(f"\t{arch}")
+    print("\n")
+
+"""
+[Running] python -u "c:\Users\mgobea\Documents\develop\python_total\9_day\tempCodeRunnerFile.py"
+c:\Users\mgobea\Documents\develop\python_total
+<generator object _walk at 0x0000017486545010>
+En la carpeta: c:\Users\mgobea\Documents\develop\python_total
+Las subcarpetas son:
+	.git
+	1_day
+	2_day
+	3_day
+	4_day
+	5_day
+	6_day
+	7_day
+	8_day
+	9_day
+Los archivos son:
+	.gitignore
+	curso.txt
+	curso_2.txt
+	prueba.json
+	prueba.txt
+	README.md
+
+
+En la carpeta: c:\Users\mgobea\Documents\develop\python_total\.git
+Las subcarpetas son:
+	hooks
+	info
+	logs
+	objects
+	refs
+Los archivos son:
+	COMMIT_EDITMSG
+	config
+	description
+	HEAD
+	index
+...
+"""
+
+# Una forma alternativa de iterar el generador que contiene el contenido de mi directorio es: 
+
+"""
 try:
     while True:
         print(next(my_walk))
 except StopIteration:
     print("Iterador vacio!")
 
-"""
 [Running] python -u "c:\Users\mgobea\Documents\develop\python_total\9_day\tempCodeRunnerFile.py"
 c:\Users\mgobea\Documents\develop\python_total
 <generator object _walk at 0x0000015DFDEB5010>
@@ -41,6 +94,8 @@ c:\Users\mgobea\Documents\develop\python_total
 ...
 Iterador vacio!
 """
+
+
 
 # Mover un archivo del directoria actual a otro directorio: 
 
