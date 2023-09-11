@@ -1,5 +1,3 @@
-import datetime
-
 class SerialNumber:
     def __init__(self, ubication: str, content: str, search_time: float) -> None:
         self.ubication = ubication
@@ -7,4 +5,4 @@ class SerialNumber:
         self.search_time = search_time
 
     def __str__(self) -> str:
-        return f"{self.ubication}\t{self.content}\n"
+        return f"{self.ubication}\t{self.content}\t{self.search_time}\n"

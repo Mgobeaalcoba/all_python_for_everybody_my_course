@@ -20,8 +20,8 @@ La presentación en pantalla de los hallazgos debe ser un listado en formato de 
 ----------------------------------------------------
 Fecha de búsqueda: [fecha de hoy]
 
-ARCHIVO		NRO. SERIE
--------		----------
+ARCHIVO		NRO. SERIE		TIEMPO BUSQUEDA    
+-------		----------		---------------
 texto1.txt	Nter-15496
 texto25.txt	Ngba-85235
 
