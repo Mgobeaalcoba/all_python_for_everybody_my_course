@@ -17,6 +17,7 @@ class Player(Character):
     def __init__(self, screen) -> None:
         super().__init__(screen)
         self.select_img = './images/nave-player.png'
+        self.lives = True
 
     def move_left(self) -> None:
         if self.position_x >= 0 and self.position_x <= 736:
@@ -59,10 +60,11 @@ class Enemy(Character):
         super().__init__(screen)
         self.position_x = choice([32, 128, 224, 320, 416, 512, 608, 704])
         self.position_y = choice([32, 128, 224])
-        __enemies_list = ["./images/nave-espacial.png", "./images/nave-extraterrestre.png", "./images/enemigo.png", "./images/astronave.png"]
+        __enemies_list = ["./images/nave-espacial.png", "./images/nave-extraterrestre.png", "./images/enemigo.png", "./images/astronave.png", "./images/ovni.png", "./images/ovni2.png", "./images/ovni3.png"]
         self.select_img = choice(__enemies_list)
-        self.moviment_x = 1
-        self.moviment_y = 1
+        self.moviment_x = 2
+        self.moviment_y = 2
+        self.lives = True
         Enemy.instances.append(self)
 
     def move_random_x(self) -> None:
@@ -81,22 +83,15 @@ class Enemy(Character):
         else:
             self.position_y = 0
 
-    def move_x_axis(self) -> None:
+    def standar_move(self) -> None:
         if self.position_x >= 0 and self.position_x <= 736:
             self.position_x += self.moviment_x
         elif self.position_x >= 736:
             self.moviment_x *= -1
             self.position_x += self.moviment_x
+            self.position_y += 16
         else:
             self.moviment_x *= -1
             self.position_x += self.moviment_x
+            self.position_y += 16
 
-    def move_y_axis(self) -> None:
-        if self.position_y >= 0 and self.position_y <= 736:
-            self.position_y += self.moviment_y
-        elif self.position_y >= 736:
-            self.moviment_y *= -1
-            self.position_y += self.moviment_y
-        else:
-            self.moviment_y *= -1
-            self.position_x += self.moviment_y

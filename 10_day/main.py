@@ -1,7 +1,7 @@
 import pygame
 from random import choice
 from model.characters import Player, Enemy, Character
-from model.weapons import Shot, ShotEnemy, ShotPlayer
+from model.weapons import Shot, ShotEnemy, ShotPlayer, Explotion
 
 
 def run() -> None:
@@ -23,12 +23,15 @@ def init_game() -> None:
     player_1 = Player(pantalla) 
 
     ## Declaracion de los enemigos:
-    for i in range(10): # 10 enemigos guardas en el atributo instances de la clase
+    for i in range(20): # 10 enemigos guardas en el atributo instances de la clase
         Enemy(pantalla)
 
     ## Declaracion de la bala del jugador:
     for i in range(10): # 10 balas creadas en el atributo instances de la clase
         ShotPlayer(-100,-100)
+
+    ## Declaración de la explosion
+    explosion_1 = Explotion(-100,-100)
     
     shot_selection = 0
     
@@ -83,13 +86,24 @@ def init_game() -> None:
         make_character(pantalla, player_1)
         ### Pinto a los enemigos en la pantalla: 
         for enemy in Enemy.instances:
-            make_character(pantalla, enemy)
-            enemy.move_x_axis()
+            if enemy.lives:
+                make_character(pantalla, enemy)
+                enemy.standar_move()
         ### Pinto a las balas y las muevo si el valor no es negativo
         for shot in ShotPlayer.instances:
-            if shot.position_x >= 0 and shot.position_y >= 0:
+            if shot.position_x >= 0 and shot.position_y >= 0 and shot.exists:
                 shot.move_up()
                 reprint_shot(pantalla, shot)
+                for enemy in Enemy.instances:
+                    distance = calculate_distance(shot.position_x, shot.position_y, enemy.position_x, enemy.position_y)
+                    if distance <= 1000:
+                        # shot.select_img = "./images/explosion.png"
+                        explosion_1.position_x = enemy.position_x
+                        explosion_1.position_y = enemy.position_y
+                        enemy.position_x = -100
+                        enemy.position_y = -100
+                        enemy.lives = False
+                        reprint_shot(pantalla, explosion_1)
 
         ### Actualizo la pantalla para que se vean nuestras novedades
         pygame.display.update()
@@ -114,9 +128,14 @@ def make_shot(pantalla: pygame.surface, character: Character, shot: Shot) -> Non
     img_shot = pygame.image.load(shot.select_img)
     pantalla.blit(img_shot, (shot.position_x, shot.position_y))
 
+
 def reprint_shot(pantalla: pygame.surface, shot: Shot) -> None:
     img_shot = pygame.image.load(shot.select_img)
     pantalla.blit(img_shot, (shot.position_x, shot.position_y))
+
+
+def calculate_distance(position_x_1, position_y_1, position_x_2, position_y_2) -> float:
+    return (position_x_2 - position_x_1)**2 + (position_y_2 - position_y_1)**2
 
 
 if __name__ == '__main__':
