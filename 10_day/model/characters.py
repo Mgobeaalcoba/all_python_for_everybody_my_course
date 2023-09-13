@@ -1,6 +1,6 @@
 from random import choice
 
-class Personaje:
+class Character:
 
     position_x = 0 
     position_y = 0
@@ -9,13 +9,14 @@ class Personaje:
         self.screen = screen
 
 
-class Player(Personaje):
+class Player(Character):
     
     position_x = 318 
     position_y = 516
 
     def __init__(self, screen) -> None:
         super().__init__(screen)
+        self.select_img = './images/nave-player.png'
 
     def move_left(self) -> None:
         if self.position_x >= 0 and self.position_x <= 736:
@@ -50,32 +51,52 @@ class Player(Personaje):
             self.position_y = 0
 
 
-class Enemy(Personaje):
+class Enemy(Character):
     # Variable de clase para almacenar las instancias
-    instancias = []
+    instances = []
 
     def __init__(self, screen) -> None:
         super().__init__(screen)
         self.position_x = choice([32, 128, 224, 320, 416, 512, 608, 704])
         self.position_y = choice([32, 128, 224])
         __enemies_list = ["./images/nave-espacial.png", "./images/nave-extraterrestre.png", "./images/enemigo.png", "./images/astronave.png"]
-        self.select_enemy = choice(__enemies_list)
-        Enemy.instancias.append(self)
+        self.select_img = choice(__enemies_list)
+        self.moviment_x = 1
+        self.moviment_y = 1
+        Enemy.instances.append(self)
 
     def move_random_x(self) -> None:
         if self.position_x >= 0 and self.position_x <= 736:
-            self.position_x += choice([-2,2])
+            self.position_x += choice([-1,1])
         elif self.position_x > 736:
             self.position_x = 736
         else:
             self.position_x = 0
 
-
     def move_random_y(self) -> None: 
         if self.position_y >= 0 and self.position_y <= 536:
-            self.position_y += choice([-2,2])
+            self.position_y += choice([-1,1])
         elif self.position_y > 536:
             self.position_y = 536
         else:
             self.position_y = 0
 
+    def move_x_axis(self) -> None:
+        if self.position_x >= 0 and self.position_x <= 736:
+            self.position_x += self.moviment_x
+        elif self.position_x >= 736:
+            self.moviment_x *= -1
+            self.position_x += self.moviment_x
+        else:
+            self.moviment_x *= -1
+            self.position_x += self.moviment_x
+
+    def move_y_axis(self) -> None:
+        if self.position_y >= 0 and self.position_y <= 736:
+            self.position_y += self.moviment_y
+        elif self.position_y >= 736:
+            self.moviment_y *= -1
+            self.position_y += self.moviment_y
+        else:
+            self.moviment_y *= -1
+            self.position_x += self.moviment_y
