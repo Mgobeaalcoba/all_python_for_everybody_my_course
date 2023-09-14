@@ -9,17 +9,18 @@ class ShotPlayer(Shot):
     instances = []
     def __init__(self, position_x, position_y) -> None:
         super().__init__(position_x, position_y)
-        self.select_img = "./images/bala_player.png"
+        self.select_img = "./assets/images/bala_player.png"
         self.exists = True
         self.instances.append(self)
 
     def move_up(self):
         self.position_y -= 4
 
+
 class ShotEnemy(Shot):
     def __init__(self, position_x, position_y) -> None:
         super().__init__(position_x, position_y)
-        self.select_img = "./images/bala_enemy.png"
+        self.select_img = "./assets/images/bala_enemy.png"
 
     def move_up(self):
         self.position_y -= 2
@@ -27,4 +28,4 @@ class ShotEnemy(Shot):
 class Explotion(Shot):
     def __init__(self, position_x, position_y) -> None:
         super().__init__(position_x, position_y)
-        self.select_img = "./images/explosion.png"
+        self.select_img = "./assets/images/explosion.png"

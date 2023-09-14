@@ -1,5 +1,6 @@
 from random import choice
 
+
 class Character:
 
     position_x = 0 
@@ -16,7 +17,7 @@ class Player(Character):
 
     def __init__(self, screen) -> None:
         super().__init__(screen)
-        self.select_img = './images/nave-player.png'
+        self.select_img = './assets/images/nave-player.png'
         self.lives = True
 
     def move_left(self) -> None:
@@ -60,7 +61,7 @@ class Enemy(Character):
         super().__init__(screen)
         self.position_x = choice([32, 128, 224, 320, 416, 512, 608, 704])
         self.position_y = choice([32, 128, 224])
-        __enemies_list = ["./images/nave-espacial.png", "./images/nave-extraterrestre.png", "./images/enemigo.png", "./images/astronave.png", "./images/ovni.png", "./images/ovni2.png", "./images/ovni3.png"]
+        __enemies_list = ["./assets/images/nave-espacial.png", "./assets/images/nave-extraterrestre.png", "./assets/images/enemigo.png", "./assets/images/astronave.png", "./assets/images/ovni.png", "./assets/images/ovni2.png", "./assets/images/ovni3.png"]
         self.select_img = choice(__enemies_list)
         self.moviment_x = 2
         self.moviment_y = 2
