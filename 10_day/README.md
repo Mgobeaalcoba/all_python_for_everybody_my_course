@@ -82,11 +82,3 @@ Space Invasion incorporates several design patterns to enhance code structure an
 - This project demonstrates the exciting world of Python programming and game development.
 
 Enjoy Space Invasion and have a blast defending Earth from the alien invasion! Feel free to contribute to the project or share your feedback with us.
-
-datas=[('*.png','./assets/images/'),('*.ttf','./assets/fonts/'),('*.mp3','./assets/sounds/')],
-
-pyinstaller --noconfirm --onedir --console --add-data "C:/Users/mgobea/Documents/develop/python_total/10_day/assets/fonts;fonts/" --add-data "C:/Users/mgobea/Documents/develop/python_total/10_day/assets/images;images/" --add-data "C:/Users/mgobea/Documents/develop/python_total/10_day/assets/sounds;sounds/" --add-data "C:/Users/mgobea/Documents/develop/python_total/10_day/model;model/" --add-data "C:/Users/mgobea/Documents/develop/python_total/10_day/service;service/" "C:/Users/mgobea/Documents/develop/python_total/10_day/main.py"
-
-pyinstaller --noconfirm --onedir --console --add-data "C:/Users/mgobea/Documents/develop/python_total/10_day/model;model/" --add-data "C:/Users/mgobea/Documents/develop/python_total/10_day/service;service/" --add-data "C:/Users/mgobea/Documents/develop/python_total/10_day/assets;assets/" --add-data "C:/Users/mgobea/Documents/develop/python_total/10_day/venv;venv/" "C:/Users/mgobea/Documents/develop/python_total/10_day/main.py"
-
-pyinstaller --noconfirm --onedir --console --add-data "C:/Users/mgobea/Documents/develop/python_total/10_day/model;model/" --add-data "C:/Users/mgobea/Documents/develop/python_total/10_day/service;service/" --add-data "C:/Users/mgobea/Documents/develop/python_total/10_day/assets;assets/" --add-data "C:/Users/mgobea/Documents/develop/python_total/10_day/venv;venv/" --add-data "C:/Users/mgobea/Documents/develop/python_total/10_day/**init**.py;." "C:/Users/mgobea/Documents/develop/python_total/10_day/main.py"
