@@ -1,8 +1,9 @@
 import pygame
 from random import choice
 from model.characters import Player, Enemy, Character
-from model.weapons import Shot, ShotEnemy, ShotPlayer, Explotion
-from model.features import ScoreCard
+from model.weapons import Shot, ShotPlayer, Explotion
+from model.features import ScoreCard, FinishText
+from .convert_to_byte import font_to_bytes
 
 
 def init_game() -> None:
@@ -34,8 +35,22 @@ def init_game() -> None:
 
     ## Declaro mi variable puntaje donde iré llevando la cuenta de los puntos acumulados en el juego
     score_card = ScoreCard()
-    font : pygame.font = pygame.font.Font('./assets/fonts/MIDELTONEROUGH.ttf', 32) # Único tipo de fuente que pygame trae por defecto. Se pueden importar otros
+    font_as_bytes = font_to_bytes("./assets/fonts/MIDELTONEROUGH.ttf")
+    font : pygame.font = pygame.font.Font(font_as_bytes, 32) # Único tipo de fuente que pygame trae por defecto. Se pueden importar otros
     
+    ## Agregar musica de fondo:
+    pygame.mixer.music.load("./assets/sounds/MusicaFondo.mp3")
+    pygame.mixer.music.set_volume(0.3) # Regula el volumen con un numero del 0 al 1. Por default es 1
+    pygame.mixer.music.play(-1) # Es para que se vuelva a repetir cuando termina
+
+    ## Declaro mi texto final para cuando concluya el juego
+    final_text = FinishText() 
+    font_as_bytes = font_to_bytes("./assets/fonts/MIDELTONEROUGH.ttf")
+    final_font : pygame.font = pygame.font.Font(font_as_bytes, 96) 
+
+    ## Declaro variable de juego finalizado:
+    game_finish = False
+
     # Loop central del juego
     ## Mostramos la pantalla para que la vea el usuario hasta que aprete en la X
     while se_ejecuta:
@@ -50,6 +65,9 @@ def init_game() -> None:
         pantalla.blit(wall_game, (0,0))
         ### Muestro el score_card
         show_score(font, score_card, pantalla)
+
+        if game_finish:
+            end_game(final_font, final_text, pantalla)
 
         ### Reviso cada uno de los eventos que existen en la nomenclatura de Pygame
         for evento in pygame.event.get():
@@ -80,6 +98,8 @@ def init_game() -> None:
                     for enemy in Enemy.instances:
                         choice([enemy.move_random_x(), enemy.move_random_y()])
                 elif evento.key == pygame.K_SPACE:
+                    shot_sound = pygame.mixer.Sound("./assets/sounds/disparo.mp3")
+                    shot_sound.play()
                     make_shot(pantalla, player_1, ShotPlayer.instances[shot_selection])
                     if shot_selection < 9:
                         shot_selection += 1
@@ -93,6 +113,14 @@ def init_game() -> None:
             if enemy.lives:
                 make_character(pantalla, enemy)
                 enemy.standar_move()
+
+            # Perder el juego
+            if enemy.position_y > 400:
+                for enemy_2 in Enemy.instances:
+                    enemy_2.lives = False  
+                game_finish = True
+                break
+
         ### Pinto a las balas y las muevo si el valor no es negativo
         for shot in ShotPlayer.instances:
             if shot.position_x >= 0 and shot.position_y >= 0 and shot.exists:
@@ -100,8 +128,9 @@ def init_game() -> None:
                 reprint_shot(pantalla, shot)
                 for enemy in Enemy.instances:
                     distance = calculate_distance(shot.position_x, shot.position_y, enemy.position_x, enemy.position_y)
-                    if distance <= 300:
-                        # shot.select_img = "./images/explosion.png"
+                    if distance <= 500:
+                        collision_sound = pygame.mixer.Sound("./assets/sounds/Golpe.mp3")  
+                        collision_sound.play()  
                         explosion_1.position_x = enemy.position_x
                         explosion_1.position_y = enemy.position_y
                         enemy.position_x = -100
@@ -111,6 +140,11 @@ def init_game() -> None:
 
         ### Actualizo la pantalla para que se vean nuestras novedades
         pygame.display.update()
+
+
+def end_game(font: pygame.font, final_text: FinishText, pantalla: pygame.surface) -> None:
+    text = font.render(f"{final_text.content}", True, (255, 255, 255))
+    pantalla.blit(text, (final_text.text_x, final_text.text_y))
 
 
 def set_name_and_icon() -> None:
