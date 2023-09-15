@@ -1,4 +1,6 @@
 from game_cycle import set_name_and_icon, init_game
+import pygame
+
 
 
 def run() -> None:
