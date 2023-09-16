@@ -1,8 +1,15 @@
+asgiref==3.7.2
 beautifulsoup4==4.12.2
 certifi==2023.7.22
 charset-normalizer==3.2.0
+Django==4.2.5
 idna==3.4
+image==1.5.33
 lxml==4.9.3
+Pillow==10.0.1
 requests==2.31.0
+six==1.16.0
 soupsieve==2.5
+sqlparse==0.4.4
+typing_extensions==4.7.1
 urllib3==2.0.4
