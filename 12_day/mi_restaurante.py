@@ -4,7 +4,7 @@ from tkinter import * # Importante importar tkinter así y no con un "import tki
 aplicacion = Tk()
 
 # Tamaño de la ventana y ubicación de la ventana
-aplicacion.geometry('1680x1050+0+0') # Va antes del loop dado que sino se mostrará pequeña como viene por default
+aplicacion.geometry('1020x630+0+0') # Va antes del loop dado que sino se mostrará pequeña como viene por default
 
 # Evitar maximizar la pantalla con la app abierta
 aplicacion.resizable(0,0)
@@ -21,7 +21,7 @@ panel_superior.pack(side=TOP)
 
 ## Etiqueta titulo para el panel superior:
 etiqueta_titulo = Label(panel_superior, text="Sistema de Facturación", fg="azure4",
-                        font=('Dosis', 58), bg="burlywood", width=27)
+                        font=('Dosis', 48), bg="burlywood", width=27)
 
 ## Seteo donde va ubicada mi etiqueta en el panel. Que en este caso es todo lo que va a haber en mi panel superior
 etiqueta_titulo.grid(row=0, column=0) 
@@ -65,7 +65,45 @@ panel_recibo.pack() # Si no colocamos nada por defecto lo ubica en la parte de a
 panel_botones = Frame(panel_derecha, bd=1, relief=FLAT, bg="burlywood")
 panel_botones.pack() # Si no colocamos nada por defecto lo ubica en la parte de arriba. En este caso, debajo de la calculadora dado que entró antes al panel 
 
+# Nueva sección: Cechkbuttons!!!
 
+# Empezemos ahora a poner dentro de nuestra estructura elementos que podamos ver como lista de comidas, bebidas, etc.
+lista_comidas = ["pollo", "cordero", "salmon", "merluza", "kebab", "pizza", "empanadas", "sushi"]
+lista_bebidas = ["agua", "soda", "jugo", "cola", "vino", "cerveza", "coctails", "lima-limon"]
+lista_postres = ["helado", "flan", "brownies", "fruta", "mousse", "pastel", "panqueques", "bombon"]
+
+## Generar items de comidas
+variables_comida = []
+contador = 0
+for comida in lista_comidas:
+    variables_comida.append('')
+    variables_comida[contador] = IntVar() # Creo la variable que va a contener la selección o selecciones de nuestro check button
+    comida = Checkbutton(panel_comidas, text=comida.title(), font=("Dosis", 19, "bold"),
+                         onvalue=1, offvalue=0, variable=variables_comida[contador]) # Onvalue y Offvalue significa el valor que va a tener la casilla cuando esté activada y offvalue lo contrario
+    comida.grid(row=contador, column=0, sticky=W) # sticky=W significa que quiero un encolumnado del lado izquierdo de la pantalla
+    contador += 1
+
+## Generar items de bebidas
+variables_bebida = []
+contador = 0
+for bebida in lista_bebidas:
+    variables_bebida.append('')
+    variables_bebida[contador] = IntVar() # Creo la variable que va a contener la selección o selecciones de nuestro check button
+    bebida = Checkbutton(panel_bebidas, text=bebida.title(), font=("Dosis", 19, "bold"),
+                         onvalue=1, offvalue=0, variable=variables_bebida[contador]) # Onvalue y Offvalue significa el valor que va a tener la casilla cuando esté activada y offvalue lo contrario
+    bebida.grid(row=contador, column=0, sticky=W) # sticky=W significa que quiero un encolumnado del lado izquierdo de la pantalla
+    contador += 1
+
+## Generar items de postres
+variables_postre = []
+contador = 0
+for postre in lista_postres:
+    variables_postre.append('')
+    variables_postre[contador] = IntVar() # Creo la variable que va a contener la selección o selecciones de nuestro check button
+    postre = Checkbutton(panel_postres, text=postre.title(), font=("Dosis", 19, "bold"),
+                         onvalue=1, offvalue=0, variable=variables_postre[contador]) # Onvalue y Offvalue significa el valor que va a tener la casilla cuando esté activada y offvalue lo contrario
+    postre.grid(row=contador, column=0, sticky=W) # sticky=W significa que quiero un encolumnado del lado izquierdo de la pantalla
+    contador += 1
 
 
 # Necesito que mi ventana Tkinter no se cierre nunca
