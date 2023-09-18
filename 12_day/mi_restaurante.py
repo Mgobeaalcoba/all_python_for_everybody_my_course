@@ -65,7 +65,7 @@ panel_recibo.pack() # Si no colocamos nada por defecto lo ubica en la parte de a
 panel_botones = Frame(panel_derecha, bd=1, relief=FLAT, bg="burlywood")
 panel_botones.pack() # Si no colocamos nada por defecto lo ubica en la parte de arriba. En este caso, debajo de la calculadora dado que entró antes al panel 
 
-# Nueva sección: Cechkbuttons!!!
+# Nueva sección: Cechkbuttons!!! y Cuadros de entrada!!!
 
 # Empezemos ahora a poner dentro de nuestra estructura elementos que podamos ver como lista de comidas, bebidas, etc.
 lista_comidas = ["pollo", "cordero", "salmon", "merluza", "kebab", "pizza", "empanadas", "sushi"]
@@ -74,37 +74,99 @@ lista_postres = ["helado", "flan", "brownies", "fruta", "mousse", "pastel", "pan
 
 ## Generar items de comidas
 variables_comida = []
+cuadros_comida = []
+texto_comida = []
+
 contador = 0
+
 for comida in lista_comidas:
+
+    ## Crear checkbuttons
     variables_comida.append('')
     variables_comida[contador] = IntVar() # Creo la variable que va a contener la selección o selecciones de nuestro check button
-    comida = Checkbutton(panel_comidas, text=comida.title(), font=("Dosis", 19, "bold"),
-                         onvalue=1, offvalue=0, variable=variables_comida[contador]) # Onvalue y Offvalue significa el valor que va a tener la casilla cuando esté activada y offvalue lo contrario
-    comida.grid(row=contador, column=0, sticky=W) # sticky=W significa que quiero un encolumnado del lado izquierdo de la pantalla
+    comida = Checkbutton(panel_comidas, 
+                         text=comida.title(), 
+                         font=("Dosis", 19, "bold"),
+                         onvalue=1, 
+                         offvalue=0, 
+                         variable=variables_comida[contador]) # Onvalue y Offvalue significa el valor que va a tener la casilla cuando esté activada y offvalue lo contrario
+    comida.grid(row=contador, 
+                column=0, 
+                sticky=W) # sticky=W significa que quiero un encolumnado del lado izquierdo de la pantalla
+
+    ## Crear los cuadros de entrada
+    cuadros_comida.append("")
+    texto_comida.append("")
+    cuadros_comida[contador] = Entry(panel_comidas, 
+                                     font=("Dosis", 18, "bold"),
+                                     bd=1, 
+                                     width=6, 
+                                     state=DISABLED, 
+                                     textvariable=texto_comida[contador]) # state=DISABLED significa que no estará activo el cuadro de entrada sino hasta que se haya presionado en el checkbox!
+    cuadros_comida[contador].grid(row=contador, 
+                                  column=1)
+    ### Incremento el valor de contador cada ciclo
     contador += 1
 
 ## Generar items de bebidas
 variables_bebida = []
+cuadros_bebida = []
+texto_bebida = []
+
 contador = 0
+
 for bebida in lista_bebidas:
+
+    ## Crear checkbuttons
     variables_bebida.append('')
     variables_bebida[contador] = IntVar() # Creo la variable que va a contener la selección o selecciones de nuestro check button
     bebida = Checkbutton(panel_bebidas, text=bebida.title(), font=("Dosis", 19, "bold"),
                          onvalue=1, offvalue=0, variable=variables_bebida[contador]) # Onvalue y Offvalue significa el valor que va a tener la casilla cuando esté activada y offvalue lo contrario
     bebida.grid(row=contador, column=0, sticky=W) # sticky=W significa que quiero un encolumnado del lado izquierdo de la pantalla
+
+    ## Crear los cuadros de entrada:
+    cuadros_bebida.append("")
+    texto_bebida.append("")
+    cuadros_bebida[contador] = Entry(panel_bebidas, 
+                                     font=("Dosis", 18, "bold"),
+                                     bd=1, 
+                                     width=6, 
+                                     state=DISABLED, 
+                                     textvariable=texto_bebida[contador]) # state=DISABLED significa que no estará activo el cuadro de entrada sino hasta que se haya presionado en el checkbox!
+    cuadros_bebida[contador].grid(row=contador, 
+                                  column=1)
+    ### Incremento el valor de contador cada ciclo
     contador += 1
 
 ## Generar items de postres
 variables_postre = []
+cuadros_postre = []
+texto_postre = []
+
 contador = 0
+
 for postre in lista_postres:
+
+    ## Crear checkbuttons
     variables_postre.append('')
     variables_postre[contador] = IntVar() # Creo la variable que va a contener la selección o selecciones de nuestro check button
     postre = Checkbutton(panel_postres, text=postre.title(), font=("Dosis", 19, "bold"),
                          onvalue=1, offvalue=0, variable=variables_postre[contador]) # Onvalue y Offvalue significa el valor que va a tener la casilla cuando esté activada y offvalue lo contrario
     postre.grid(row=contador, column=0, sticky=W) # sticky=W significa que quiero un encolumnado del lado izquierdo de la pantalla
-    contador += 1
 
+    ## Crear los cuadros de entrada:
+    cuadros_postre.append("")
+    texto_postre.append("")
+    cuadros_postre[contador] = Entry(panel_postres, 
+                                     font=("Dosis", 18, "bold"),
+                                     bd=1, 
+                                     width=6, 
+                                     state=DISABLED, 
+                                     textvariable=texto_postre[contador]) # state=DISABLED significa que no estará activo el cuadro de entrada sino hasta que se haya presionado en el checkbox!
+    cuadros_postre[contador].grid(row=contador, 
+                                  column=1)
+    ### Incremento el valor de contador cada ciclo
+    contador += 1
 
 # Necesito que mi ventana Tkinter no se cierre nunca
 aplicacion.mainloop() # Hace que nuestra ventana no se cierre. 
