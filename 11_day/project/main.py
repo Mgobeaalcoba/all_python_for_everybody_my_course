@@ -59,7 +59,6 @@ print(f"Web a hacerle Get es: {dinamic_web}")
 print()
 
 while result.reason != "Not Found":
-    result = requests.get(f"http://books.toscrape.com/catalogue/category/books_1/page-{counter}.html")
     print(result.reason)
     print(result)
     soup = bs4.BeautifulSoup(result.text, 'lxml')
@@ -109,11 +108,11 @@ while result.reason != "Not Found":
 print(len(my_titles))
 print()
 
-for title in my_titles:
-    print(title)
+# for title in my_titles:
+#     print(title)
 
 # Guardo los nombres en un archivo en la raiz del proyecto con el nombre ya construido:
-with open("project/best_books.txt", 'a') as f:
+with open("project/best_books.txt", 'a', encoding="utf-8") as f:
     for title in my_titles:
         f.write(title+"\n")
 
