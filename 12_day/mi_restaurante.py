@@ -31,7 +31,7 @@ panel_izquierdo = Frame(aplicacion, bd=1, relief=FLAT)
 panel_izquierdo.pack(side=LEFT)
 
 # Configuramos el panel de costos que va dentro del panel izquierdo
-panel_costos = Frame(panel_izquierdo, bd=1, relief=FLAT)
+panel_costos = Frame(panel_izquierdo, bd=1, relief=FLAT, bg="azure4", padx=110)
 panel_costos.pack(side=BOTTOM)
 
 # Configuramos el panel de comidas"
@@ -175,6 +175,114 @@ for postre in lista_postres:
                                   column=1)
     ### Incremento el valor de contador cada ciclo
     contador += 1
+
+# Panel de Costos
+## variables
+var_costo_comida = StringVar()
+var_costo_bebida = StringVar()
+var_costo_postre = StringVar()
+var_subtotal = StringVar()
+var_impuesto = StringVar()
+var_total = StringVar()
+
+## Etiquetas de costo y campos de entrada
+### Comida
+etiqueta_costo_comida = Label(panel_costos,
+                              text="Costo Comida",
+                              font=("Dosis", 12, "bold"),
+                              bg="azure4",
+                              fg="white")
+etiqueta_costo_comida.grid(row=0, column=0)
+
+texto_costo_comida = Entry(panel_costos, 
+                           font=("Dosis", 12, "bold"),
+                           bd=1,
+                           width=10,
+                           state="readonly",
+                           textvariable=var_costo_comida)
+texto_costo_comida.grid(row=0, column=1, padx=41)
+
+### Bebida
+etiqueta_costo_bebida = Label(panel_costos,
+                              text="Costo Bebida",
+                              font=("Dosis", 12, "bold"),
+                              bg="azure4",
+                              fg="white")
+etiqueta_costo_bebida.grid(row=1, column=0)
+
+texto_costo_bebida = Entry(panel_costos, 
+                           font=("Dosis", 12, "bold"),
+                           bd=1,
+                           width=10,
+                           state="readonly",
+                           textvariable=var_costo_bebida)
+texto_costo_bebida.grid(row=1, column=1, padx=41)
+
+### Postre
+etiqueta_costo_postre = Label(panel_costos,
+                              text="Costo Postre",
+                              font=("Dosis", 12, "bold"),
+                              bg="azure4",
+                              fg="white")
+etiqueta_costo_postre.grid(row=2, column=0)
+
+texto_costo_postre = Entry(panel_costos, 
+                           font=("Dosis", 12, "bold"),
+                           bd=1,
+                           width=10,
+                           state="readonly",
+                           textvariable=var_costo_postre)
+texto_costo_postre.grid(row=2, column=1, padx=41)
+
+### Subtotal
+etiqueta_subtotal = Label(panel_costos,
+                              text="Subtotal",
+                              font=("Dosis", 12, "bold"),
+                              bg="azure4",
+                              fg="white")
+etiqueta_subtotal.grid(row=0, column=2)
+
+texto_subtotal = Entry(panel_costos, 
+                           font=("Dosis", 12, "bold"),
+                           bd=1,
+                           width=10,
+                           state="readonly",
+                           textvariable=var_subtotal)
+texto_subtotal.grid(row=0, column=3, padx=41)
+
+### Impuesto
+etiqueta_impuesto = Label(panel_costos,
+                              text="Impuestos",
+                              font=("Dosis", 12, "bold"),
+                              bg="azure4",
+                              fg="white")
+etiqueta_impuesto.grid(row=1, column=2)
+
+texto_impuesto = Entry(panel_costos, 
+                           font=("Dosis", 12, "bold"),
+                           bd=1,
+                           width=10,
+                           state="readonly",
+                           textvariable=var_impuesto)
+texto_impuesto.grid(row=1, column=3, padx=41)
+
+### Total
+etiqueta_total = Label(panel_costos,
+                              text="Total",
+                              font=("Dosis", 12, "bold"),
+                              bg="azure4",
+                              fg="white")
+etiqueta_total.grid(row=2, column=2)
+
+texto_total = Entry(panel_costos, 
+                           font=("Dosis", 12, "bold"),
+                           bd=1,
+                           width=10,
+                           state="readonly",
+                           textvariable=var_total)
+texto_total.grid(row=2, column=3, padx=41) # padx = Agraga un padding entre el texto y el borde del objeto
+
+
 
 # Necesito que mi ventana Tkinter no se cierre nunca
 aplicacion.mainloop() # Hace que nuestra ventana no se cierre. 
