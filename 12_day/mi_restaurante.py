@@ -4,7 +4,7 @@ from tkinter import * # Importante importar tkinter así y no con un "import tki
 aplicacion = Tk()
 
 # Tamaño de la ventana y ubicación de la ventana
-aplicacion.geometry('1020x630+0+0') # Va antes del loop dado que sino se mostrará pequeña como viene por default
+aplicacion.geometry('1250x630+0+0') # Va antes del loop dado que sino se mostrará pequeña como viene por default
 
 # Evitar maximizar la pantalla con la app abierta
 aplicacion.resizable(0,0)
@@ -281,6 +281,38 @@ texto_total = Entry(panel_costos,
                            state="readonly",
                            textvariable=var_total)
 texto_total.grid(row=2, column=3, padx=41) # padx = Agraga un padding entre el texto y el borde del objeto
+
+# Botones a construir a traves de un loop y una lista
+
+## Defino mi lista de botones:
+botones = ["Total", "Recibo", "Guardar", "Resetear"]
+columna = 0
+
+## Loop para crear todos mis botones y ubicarlos en el panel
+for boton in botones:
+    ### Creacion de los botones
+    boton = Button(panel_botones,
+                   text=boton.title(),
+                   font=("Dosis", 14, "bold"),
+                   fg="white",
+                   bg="azure4",
+                   bd=1,
+                   width=9)
+    ### Ubicacion de los mismos en el panel:
+    boton.grid(row=0, column=columna)
+    columna += 1
+
+# Armo el contenido de mi panel de Recibo
+
+## Creo mi texto de recibo
+texto_recibo = Text(panel_recibo,
+                    font=("Dosis", 12, "bold"),
+                    bd=1,
+                    width=42,
+                    height=10)
+
+## Ubico a mi texto de recibo
+texto_recibo.grid(row=0,column=0) # Es 0 y 0 dado que no hay otros elementos dentro de este panel
 
 
 
