@@ -4,7 +4,7 @@ from tkinter import * # Importante importar tkinter así y no con un "import tki
 aplicacion = Tk()
 
 # Tamaño de la ventana y ubicación de la ventana
-aplicacion.geometry('1250x630+0+0') # Va antes del loop dado que sino se mostrará pequeña como viene por default
+aplicacion.geometry('1248x630+0+0') # Va antes del loop dado que sino se mostrará pequeña como viene por default 1250x630
 
 # Evitar maximizar la pantalla con la app abierta
 aplicacion.resizable(0,0)
@@ -86,7 +86,7 @@ for comida in lista_comidas:
     variables_comida[contador] = IntVar() # Creo la variable que va a contener la selección o selecciones de nuestro check button
     comida = Checkbutton(panel_comidas, 
                          text=comida.title(), 
-                         font=("Dosis", 19, "bold"),
+                         font=("Dosis", 19),
                          onvalue=1, 
                          offvalue=0, 
                          variable=variables_comida[contador]) # Onvalue y Offvalue significa el valor que va a tener la casilla cuando esté activada y offvalue lo contrario
@@ -123,8 +123,12 @@ for bebida in lista_bebidas:
     ## Crear checkbuttons
     variables_bebida.append('')
     variables_bebida[contador] = IntVar() # Creo la variable que va a contener la selección o selecciones de nuestro check button
-    bebida = Checkbutton(panel_bebidas, text=bebida.title(), font=("Dosis", 19, "bold"),
-                         onvalue=1, offvalue=0, variable=variables_bebida[contador]) # Onvalue y Offvalue significa el valor que va a tener la casilla cuando esté activada y offvalue lo contrario
+    bebida = Checkbutton(panel_bebidas, 
+                         text=bebida.title(), 
+                         font=("Dosis", 19),
+                         onvalue=1, 
+                         offvalue=0, 
+                         variable=variables_bebida[contador]) # Onvalue y Offvalue significa el valor que va a tener la casilla cuando esté activada y offvalue lo contrario
     bebida.grid(row=contador, column=0, sticky=W) # sticky=W significa que quiero un encolumnado del lado izquierdo de la pantalla
 
     ## Crear los cuadros de entrada:
@@ -156,8 +160,12 @@ for postre in lista_postres:
     ## Crear checkbuttons
     variables_postre.append('')
     variables_postre[contador] = IntVar() # Creo la variable que va a contener la selección o selecciones de nuestro check button
-    postre = Checkbutton(panel_postres, text=postre.title(), font=("Dosis", 19, "bold"),
-                         onvalue=1, offvalue=0, variable=variables_postre[contador]) # Onvalue y Offvalue significa el valor que va a tener la casilla cuando esté activada y offvalue lo contrario
+    postre = Checkbutton(panel_postres, 
+                         text=postre.title(), 
+                         font=("Dosis", 19),
+                         onvalue=1, 
+                         offvalue=0, 
+                         variable=variables_postre[contador]) # Onvalue y Offvalue significa el valor que va a tener la casilla cuando esté activada y offvalue lo contrario
     postre.grid(row=contador, column=0, sticky=W) # sticky=W significa que quiero un encolumnado del lado izquierdo de la pantalla
 
     ## Crear los cuadros de entrada:
@@ -308,11 +316,51 @@ for boton in botones:
 texto_recibo = Text(panel_recibo,
                     font=("Dosis", 12, "bold"),
                     bd=1,
-                    width=42,
+                    width=51,
                     height=10)
 
 ## Ubico a mi texto de recibo
 texto_recibo.grid(row=0,column=0) # Es 0 y 0 dado que no hay otros elementos dentro de este panel
+
+# Armo la calculadora de mi sistema y con esto terminamos la parte VISUAL. Falta la lógica de negocio. 
+
+## Creamos el visor de la calculadora
+visor_calculadora = Entry(panel_calculadora, 
+                          font=("Dosis", 16, "bold"),
+                          width=39,
+                          bd=1)
+
+## Establecemos la ubicación del visor en el panel:
+visor_calculadora.grid(row=0, column=0, columnspan=4) # Aparece arriba de todo. Columnspan=4 es para que ocupe todo el ancho de mi columna
+
+## Creo los 16 botones de mi calculadora. Como son un montón voy a hacerlo mediante un loop. 
+botones_calculadora = ["7","8","9","+",
+                       "4","5","6","-",
+                       "1","2","3","X",
+                       "C","B","0","/"]
+
+## Creo las variables que van ordenar la inserción de mis botones. Sabiendo que la fila 0 ya está ocupada con el visor de mi calculadora:
+fila = 1
+columna = 0
+
+for boton in botones_calculadora:
+    ### Creo a mis botones de calculador
+    boton = Button(panel_calculadora,
+                   text=boton.title(),
+                   font=("Dosis", 14, "bold"),
+                   fg="white",
+                   bg="azure4",
+                   bd=1,
+                   width=9)
+    
+    ### Ubico a mis botones de calculadora 
+    boton.grid(row=fila, column=columna)
+    
+    if columna == 3:
+        columna = 0
+        fila += 1
+    else:
+        columna += 1
 
 
 
