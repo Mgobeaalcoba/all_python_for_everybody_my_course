@@ -360,21 +360,38 @@ def pintar_frontend():
 
         # Edito el texto recibo
         texto_recibo.delete(1.0, END)
-        texto_recibo.insert(END, "************************************\n")
+        texto_recibo.insert(END, "*" * 65 + "\n")
         texto_recibo.insert(END, f"Factura N° {randint(1000,9999)}-{randint(1000000,9999999)}\n")
         texto_recibo.insert(END, f"Fecha de emisión {datetime.date.today()}\n")
         texto_recibo.insert(END, "\n")
-        texto_recibo.insert(END, "************************************\n")
-        texto_recibo.insert(END, "Detalle\n")
+        texto_recibo.insert(END, "*" * 65 + "\n")
+        texto_recibo.insert(END, f"Items\t\tCant.\t\tCosto Items\n")
+        texto_recibo.insert(END, "-" * 78 + "\n")
+
+        for x in range(len(texto_comida)):
+            if texto_comida[x].get() != "0":
+                texto_recibo.insert(END, f"{lista_comidas[x]}\t\t{texto_comida[x].get()}\t\t{int(texto_comida[x].get()) * precios_comida[x]}\n")
+
+        for x in range(len(texto_bebida)):
+            if texto_bebida[x].get() != "0":
+                texto_recibo.insert(END, f"{lista_bebidas[x]}\t\t{texto_bebida[x].get()}\t\t{int(texto_bebida[x].get()) * precios_bebida[x]}\n")
+
+        for x in range(len(texto_postre)):
+            if texto_postre[x].get() != "0":
+                texto_recibo.insert(END, f"{lista_postres[x]}\t\t{texto_postre[x].get()}\t\t{int(texto_postre[x].get()) * precios_postres[x]}\n")
+        
+        texto_recibo.insert(END, "-" * 78 + "\n")
         texto_recibo.insert(END, "\n")
+        texto_recibo.insert(END, "Resumen\n")
+        texto_recibo.insert(END, "-" * 78 + "\n")
         texto_recibo.insert(END, f"[1] Comida: $ {round(sub_total_comida, 2)}\n")
         texto_recibo.insert(END, f"[2] Bebida: $ {round(sub_total_bebida, 2)}\n")
         texto_recibo.insert(END, f"[3] Postre: $ {round(sub_total_postre, 2)}\n")
         texto_recibo.insert(END, f"[4] Subtotal: $ {round(total_sin_impuestos, 2)}\n")
         texto_recibo.insert(END, f"[5] Impuestos: $ {round(impuestos, 2)}\n")
+        texto_recibo.insert(END, "-" * 78 + "\n")
         texto_recibo.insert(END, "\n")
-        texto_recibo.insert(END, "************************************\n")
-        texto_recibo.insert(END, "\n")
+        texto_recibo.insert(END, "*" * 65 + "\n")
         texto_recibo.insert(END, f"[6] Total: $ {round(total, 2)}\n")
 
     ## Calcular Total para el primer boton
