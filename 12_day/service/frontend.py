@@ -96,8 +96,8 @@ def pintar_frontend():
                     cuadros_comida[x].delete(0, END)
                 cuadros_comida[x].focus()
             else:
-                if cuadros_comida[x].get() == "":
-                    cuadros_comida[x].insert(END, "0")
+                cuadros_comida[x].delete(0, END)
+                cuadros_comida[x].insert(END, "0")
                 cuadros_comida[x].config(state=DISABLED)
 
         for x in range(len(cuadros_bebida)):
@@ -107,8 +107,8 @@ def pintar_frontend():
                     cuadros_bebida[x].delete(0, END)
                 cuadros_bebida[x].focus()
             else:
-                if cuadros_bebida[x].get() == "":
-                    cuadros_bebida[x].insert(END, "0")
+                cuadros_bebida[x].delete(0, END)
+                cuadros_bebida[x].insert(END, "0")
                 cuadros_bebida[x].config(state=DISABLED)
 
         for x in range(len(cuadros_postre)):
@@ -118,8 +118,8 @@ def pintar_frontend():
                     cuadros_postre[x].delete(0, END)
                 cuadros_postre[x].focus()
             else:
-                if cuadros_postre[x].get() == "":
-                    cuadros_postre[x].insert(END, "0")
+                cuadros_postre[x].delete(0, END)
+                cuadros_postre[x].insert(END, "0")
                 cuadros_postre[x].config(state=DISABLED)
 
     ## Generar items de comidas
@@ -353,7 +353,50 @@ def pintar_frontend():
 
     columna = 0
 
-    # Defino las funciones que van a realizar mis botones (Esto podría pasarse a lógica de negocio con una clase Botonera)
+    # Defino las funciones que van a realizar mis botones:
+
+    def resetear() -> None:
+        texto_recibo.delete(0.1, END)
+
+        ## Seteo en cero las cantidades de cada comida
+        for texto in texto_comida:
+            texto.set("0")
+
+        for texto in texto_bebida:
+            texto.set("0")
+
+        for texto in texto_postre:
+            texto.set("0")
+
+        ## Desactivo los cuadros de entrada
+        for cuadro in cuadros_comida:
+            cuadro.config(state=DISABLED)
+        
+        for cuadro in cuadros_bebida:
+            cuadro.config(state=DISABLED)
+
+        for cuadro in cuadros_postre:
+            cuadro.config(state=DISABLED)
+
+        ## vuelvo a cero los checkbuttons: 
+        for v in variables_comida:
+            v.set(0)
+
+        for v in variables_bebida:
+            v.set(0)
+
+        for v in variables_postre:
+            v.set(0)
+
+        ## Seteo en nada los cuadros de los Entry que me restan:
+        var_costo_comida.set("")
+        var_costo_bebida.set("")
+        var_costo_postre.set("")
+        var_impuesto.set("")
+        var_subtotal.set("")
+        var_total.set("")
+
+        
 
     ## Guardar recibo para el segundo botón:
     def guardar_recibo() -> None:
@@ -517,6 +560,7 @@ def pintar_frontend():
     botones_creados[0].config(command=calcular_total)
     botones_creados[1].config(command=imprimir_recibo)
     botones_creados[2].config(command=guardar_recibo)
+    botones_creados[3].config(command=resetear)
 
     # Armo el contenido de mi panel de Recibo
 
