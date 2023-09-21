@@ -1,6 +1,8 @@
 from tkinter import * # Importante importar tkinter así y no con un "import tkinter" porque te ahorra mucho código al llamar las clases, constantes, etc.
 from model.calculadora import Calculadora
-
+from typing import Tuple, Union
+from random import randint
+import datetime
 
 
 def pintar_frontend():
@@ -76,12 +78,18 @@ def pintar_frontend():
     lista_bebidas = ["agua", "soda", "jugo", "cola", "vino", "cerveza", "coctails", "lima-limon"]
     lista_postres = ["helado", "flan", "brownies", "fruta", "mousse", "pastel", "panqueques", "bombon"]
 
+    # Defino los precios de mis productos ofrecidos en el restaurante: 
+    precios_comida = [1.32, 1.65, 2.31, 3.22, 1.22, 1.99, 2.05, 2.65]
+    precios_bebida = [0.25, 0.99, 1.21, 1.54, 1.08, 1.10, 2.00, 1.58]
+    precios_postres = [1.54, 1.68, 1.32, 1.97, 2.55, 2.14, 1.94, 1.74]
+
     # Función para revisar si los checkbuttons se activaron o no y habilitar los Entry frente a su activación
     def revisar_check():
         for x in range(len(cuadros_comida)):
             if variables_comida[x].get() == 1:
                 cuadros_comida[x].config(state=NORMAL)
-                cuadros_comida[x].delete(0, END)
+                if cuadros_comida[x].get() == "0":
+                    cuadros_comida[x].delete(0, END)
                 cuadros_comida[x].focus()
             else:
                 if cuadros_comida[x].get() == "":
@@ -91,7 +99,8 @@ def pintar_frontend():
         for x in range(len(cuadros_bebida)):
             if variables_bebida[x].get() == 1:
                 cuadros_bebida[x].config(state=NORMAL)
-                cuadros_bebida[x].delete(0, END)
+                if cuadros_bebida[x].get() == "0":
+                    cuadros_bebida[x].delete(0, END)
                 cuadros_bebida[x].focus()
             else:
                 if cuadros_bebida[x].get() == "":
@@ -101,7 +110,8 @@ def pintar_frontend():
         for x in range(len(cuadros_postre)):
             if variables_postre[x].get() == 1:
                 cuadros_postre[x].config(state=NORMAL)
-                cuadros_postre[x].delete(0, END)
+                if cuadros_postre[x].get() == "0":
+                    cuadros_postre[x].delete(0, END)
                 cuadros_postre[x].focus()
             else:
                 if cuadros_postre[x].get() == "":
@@ -331,9 +341,99 @@ def pintar_frontend():
 
     # Botones a construir a traves de un loop y una lista
 
-    ## Defino mi lista de botones:
+    ## Defino mi lista de nombres de botones:
     botones = ["Total", "Recibo", "Guardar", "Resetear"]
+
+    # Defino otra lista para guardar mis objetos Button creados
+    botones_creados = []
+
     columna = 0
+
+    # Defino las funciones que van a realizar mis botones (Esto podría pasarse a lógica de negocio con una clase Botonera)
+
+    ## Imprimir recibo para el segundo botón:
+    def imprimir_recibo() -> None:
+        sub_total_comida, sub_total_bebida,  sub_total_postre = calcular_subtotales()
+        total_sin_impuestos = sub_total_comida + sub_total_bebida + sub_total_postre
+        impuestos = calcular_impuestos(total_sin_impuestos)
+        total = total_sin_impuestos + impuestos
+
+        # Edito el texto recibo
+        texto_recibo.delete(1.0, END)
+        texto_recibo.insert(END, "************************************\n")
+        texto_recibo.insert(END, f"Factura N° {randint(1000,9999)}-{randint(1000000,9999999)}\n")
+        texto_recibo.insert(END, f"Fecha de emisión {datetime.date.today()}\n")
+        texto_recibo.insert(END, "\n")
+        texto_recibo.insert(END, "************************************\n")
+        texto_recibo.insert(END, "Detalle\n")
+        texto_recibo.insert(END, "\n")
+        texto_recibo.insert(END, f"[1] Comida: $ {round(sub_total_comida, 2)}\n")
+        texto_recibo.insert(END, f"[2] Bebida: $ {round(sub_total_bebida, 2)}\n")
+        texto_recibo.insert(END, f"[3] Postre: $ {round(sub_total_postre, 2)}\n")
+        texto_recibo.insert(END, f"[4] Subtotal: $ {round(total_sin_impuestos, 2)}\n")
+        texto_recibo.insert(END, f"[5] Impuestos: $ {round(impuestos, 2)}\n")
+        texto_recibo.insert(END, "\n")
+        texto_recibo.insert(END, "************************************\n")
+        texto_recibo.insert(END, "\n")
+        texto_recibo.insert(END, f"[6] Total: $ {round(total, 2)}\n")
+
+    ## Calcular Total para el primer boton
+    def calcular_total() -> None:
+        sub_total_comida, sub_total_bebida,  sub_total_postre = calcular_subtotales()
+        total_sin_impuestos = sub_total_comida + sub_total_bebida + sub_total_postre
+        impuestos = calcular_impuestos(total_sin_impuestos)
+        total = total_sin_impuestos + impuestos
+
+        # Edito el panel de costos
+        texto_costo_comida.config(state=NORMAL)
+        texto_costo_comida.delete(0, END)
+        texto_costo_comida.insert(END, f"$ {round(sub_total_comida, 2)}")
+        texto_costo_comida.config(state="readonly")
+
+        texto_costo_bebida.config(state=NORMAL)
+        texto_costo_bebida.delete(0, END)
+        texto_costo_bebida.insert(END, f"$ {round(sub_total_bebida, 2)}")
+        texto_costo_bebida.config(state="readonly")
+
+        texto_costo_postre.config(state=NORMAL)
+        texto_costo_postre.delete(0, END)
+        texto_costo_postre.insert(END, f"$ {round(sub_total_postre, 2)}")
+        texto_costo_postre.config(state="readonly")
+
+        texto_subtotal.config(state=NORMAL)
+        texto_subtotal.delete(0, END)
+        texto_subtotal.insert(END, f"$ {round(total_sin_impuestos, 2)}")
+        texto_subtotal.config(state="readonly")
+
+        texto_impuesto.config(state=NORMAL)
+        texto_impuesto.delete(0, END)
+        texto_impuesto.insert(END, f"$ {round(impuestos, 2)}")
+        texto_impuesto.config(state="readonly")
+
+        texto_total.config(state=NORMAL)
+        texto_total.delete(0, END)
+        texto_total.insert(END, f"$ {round(total, 2)}")
+        texto_total.config(state="readonly")
+
+    ## Auxiliares
+    def calcular_impuestos(importe: int | float) -> int | float:
+        return importe * 0.21
+
+
+    def calcular_subtotales() -> Tuple[Union[int, float], Union[int, float], Union[int, float]]:
+        sub_total_comida = 0
+        for x in range(len(cuadros_comida)):
+            sub_total_comida += int(cuadros_comida[x].get()) * precios_comida[x]
+
+        sub_total_bebida = 0
+        for x in range(len(cuadros_bebida)):
+            sub_total_bebida += int(cuadros_bebida[x].get()) * precios_bebida[x]
+        
+        sub_total_postre = 0
+        for x in range(len(cuadros_postre)):
+            sub_total_postre += int(cuadros_postre[x].get()) * precios_postres[x]
+
+        return sub_total_comida, sub_total_bebida,  sub_total_postre
 
     ## Loop para crear todos mis botones y ubicarlos en el panel
     for boton in botones:
@@ -348,6 +448,12 @@ def pintar_frontend():
         ### Ubicacion de los mismos en el panel:
         boton.grid(row=0, column=columna)
         columna += 1
+        ### Agrego los botones creados a mi lista de objetos
+        botones_creados.append(boton)
+
+    ## Con todos mis botones creados ahora voy a asignarle a cada uno de ellos su función
+    botones_creados[0].config(command=calcular_total)
+    botones_creados[1].config(command=imprimir_recibo)
 
     # Armo el contenido de mi panel de Recibo
 
