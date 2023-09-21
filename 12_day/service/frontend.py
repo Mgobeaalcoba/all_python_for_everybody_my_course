@@ -2,6 +2,7 @@ from tkinter import * # Importante importar tkinter así y no con un "import tki
 from model.calculadora import Calculadora
 
 
+
 def pintar_frontend():
     # Iniciar a tkinter
     aplicacion = Tk()
@@ -75,6 +76,38 @@ def pintar_frontend():
     lista_bebidas = ["agua", "soda", "jugo", "cola", "vino", "cerveza", "coctails", "lima-limon"]
     lista_postres = ["helado", "flan", "brownies", "fruta", "mousse", "pastel", "panqueques", "bombon"]
 
+    # Función para revisar si los checkbuttons se activaron o no y habilitar los Entry frente a su activación
+    def revisar_check():
+        for x in range(len(cuadros_comida)):
+            if variables_comida[x].get() == 1:
+                cuadros_comida[x].config(state=NORMAL)
+                cuadros_comida[x].delete(0, END)
+                cuadros_comida[x].focus()
+            else:
+                if cuadros_comida[x].get() == "":
+                    cuadros_comida[x].insert(END, "0")
+                cuadros_comida[x].config(state=DISABLED)
+
+        for x in range(len(cuadros_bebida)):
+            if variables_bebida[x].get() == 1:
+                cuadros_bebida[x].config(state=NORMAL)
+                cuadros_bebida[x].delete(0, END)
+                cuadros_bebida[x].focus()
+            else:
+                if cuadros_bebida[x].get() == "":
+                    cuadros_bebida[x].insert(END, "0")
+                cuadros_bebida[x].config(state=DISABLED)
+
+        for x in range(len(cuadros_postre)):
+            if variables_postre[x].get() == 1:
+                cuadros_postre[x].config(state=NORMAL)
+                cuadros_postre[x].delete(0, END)
+                cuadros_postre[x].focus()
+            else:
+                if cuadros_postre[x].get() == "":
+                    cuadros_postre[x].insert(END, "0")
+                cuadros_postre[x].config(state=DISABLED)
+
     ## Generar items de comidas
     variables_comida = []
     cuadros_comida = []
@@ -92,7 +125,8 @@ def pintar_frontend():
                             font=("Dosis", 19),
                             onvalue=1, 
                             offvalue=0, 
-                            variable=variables_comida[contador]) # Onvalue y Offvalue significa el valor que va a tener la casilla cuando esté activada y offvalue lo contrario
+                            variable=variables_comida[contador],
+                            command=revisar_check) # Onvalue y Offvalue significa el valor que va a tener la casilla cuando esté activada y offvalue lo contrario
         comida.grid(row=contador, 
                     column=0, 
                     sticky=W) # sticky=W significa que quiero un encolumnado del lado izquierdo de la pantalla
@@ -131,7 +165,8 @@ def pintar_frontend():
                             font=("Dosis", 19),
                             onvalue=1, 
                             offvalue=0, 
-                            variable=variables_bebida[contador]) # Onvalue y Offvalue significa el valor que va a tener la casilla cuando esté activada y offvalue lo contrario
+                            variable=variables_bebida[contador],
+                            command=revisar_check) # Onvalue y Offvalue significa el valor que va a tener la casilla cuando esté activada y offvalue lo contrario
         bebida.grid(row=contador, column=0, sticky=W) # sticky=W significa que quiero un encolumnado del lado izquierdo de la pantalla
 
         ## Crear los cuadros de entrada:
@@ -168,7 +203,8 @@ def pintar_frontend():
                             font=("Dosis", 19),
                             onvalue=1, 
                             offvalue=0, 
-                            variable=variables_postre[contador]) # Onvalue y Offvalue significa el valor que va a tener la casilla cuando esté activada y offvalue lo contrario
+                            variable=variables_postre[contador],
+                            command=revisar_check) # Onvalue y Offvalue significa el valor que va a tener la casilla cuando esté activada y offvalue lo contrario
         postre.grid(row=contador, column=0, sticky=W) # sticky=W significa que quiero un encolumnado del lado izquierdo de la pantalla
 
         ## Crear los cuadros de entrada:
