@@ -1,8 +1,12 @@
 from tkinter import * # Importante importar tkinter así y no con un "import tkinter" porque te ahorra mucho código al llamar las clases, constantes, etc.
+from tkinter import messagebox, filedialog
 from model.calculadora import Calculadora
 from typing import Tuple, Union
 from random import randint
+from pathlib import Path
+import re
 import datetime
+import os
 
 
 def pintar_frontend():
@@ -351,6 +355,44 @@ def pintar_frontend():
 
     # Defino las funciones que van a realizar mis botones (Esto podría pasarse a lógica de negocio con una clase Botonera)
 
+    ## Guardar recibo para el segundo botón:
+    def guardar_recibo() -> None:
+        info_recibo = texto_recibo.get(1.0, END)
+
+        # Defino el patron de busqueda para identificar el id de mi factura: 
+        patron = r"\d{4}-\d{7}"
+
+        # Busco el patron en el texto señalado:
+        resultado = re.search(patron, info_recibo)
+
+        # Verifica si se encontró el patrón y extrae el resultado si es así
+        if resultado:
+            factura = resultado.group()
+        else:
+            factura = "0000-0000001"
+
+        factura_id = "factura_n_" + f"{factura}"
+
+        # Forma de guardado de la factura automatizada con su verdadero nombre en una carpeta dentro del proyecto destinada para tales fines
+
+        # # # Obtener la ruta de la carpeta actual desde donde se ejecuta main.py
+        # # ruta_actual = os.getcwd()
+        # # # Sumo una carpeta out para guardar las facturas emitidas: 
+        # # bill_folder = Path(ruta_actual, "out")
+
+        # # # Creo y grabo mis facturas en formato .txt: 
+        # # with open(f"{bill_folder}\\{factura_id}.txt", "w") as f:
+        # #     # Edito el texto recibo
+        # #     f.write(info_recibo)
+
+        # Forma de guardado a elección del usuario y con nombre elegido por el usuario usando filedialog.asksaveasfile
+
+        archivo = filedialog.asksaveasfile(mode="w", defaultextension=".txt")
+        archivo.write(info_recibo)
+        archivo.close()
+        messagebox.showinfo("Información", "Su recibo ha sido guardado")
+
+
     ## Imprimir recibo para el segundo botón:
     def imprimir_recibo() -> None:
         sub_total_comida, sub_total_bebida,  sub_total_postre = calcular_subtotales()
@@ -358,10 +400,12 @@ def pintar_frontend():
         impuestos = calcular_impuestos(total_sin_impuestos)
         total = total_sin_impuestos + impuestos
 
+        factura_id = "Factura N°" + f"{randint(1000,9999)}-{randint(1000000,9999999)}"
+
         # Edito el texto recibo
         texto_recibo.delete(1.0, END)
         texto_recibo.insert(END, "*" * 65 + "\n")
-        texto_recibo.insert(END, f"Factura N° {randint(1000,9999)}-{randint(1000000,9999999)}\n")
+        texto_recibo.insert(END, f"{factura_id}\n")
         texto_recibo.insert(END, f"Fecha de emisión {datetime.date.today()}\n")
         texto_recibo.insert(END, "\n")
         texto_recibo.insert(END, "*" * 65 + "\n")
@@ -393,6 +437,7 @@ def pintar_frontend():
         texto_recibo.insert(END, "\n")
         texto_recibo.insert(END, "*" * 65 + "\n")
         texto_recibo.insert(END, f"[6] Total: $ {round(total, 2)}\n")
+
 
     ## Calcular Total para el primer boton
     def calcular_total() -> None:
@@ -471,6 +516,7 @@ def pintar_frontend():
     ## Con todos mis botones creados ahora voy a asignarle a cada uno de ellos su función
     botones_creados[0].config(command=calcular_total)
     botones_creados[1].config(command=imprimir_recibo)
+    botones_creados[2].config(command=guardar_recibo)
 
     # Armo el contenido de mi panel de Recibo
 
