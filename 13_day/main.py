@@ -162,6 +162,7 @@ def distintas_voces() -> str:
 
     # Guardo los id's en variables para luego poder usarlos si fuese necesario:
     id1 = 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_EN-US_ZIRA_11.0'
+    id2 = 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_ES-MX_SABINA_11.0'
 
     return id1
 
