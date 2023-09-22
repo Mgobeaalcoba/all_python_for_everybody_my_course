@@ -125,10 +125,19 @@ def pedir_hora():
 
 # Saludo inicial
 def saludo_inicial():
+    # Desear buenos días, buenas tardes o buenas noches en función del horario
+    hora = datetime.datetime.now().hour
+
+    # Armó el saludo deseado en función del horario
+    if hora < 5:
+        greetings = "Good evening"
+    elif hora < 13:
+        greetings = "Good morning"
+    else:
+        greetings = "Good afternoon"
+
     # Decir el saludo!
-    hablar("Hello, I'm Ada, your personal assistant. Tell me where I can help you")
-
-
+    hablar(f"Hello, {greetings}, I'm Ada, your personal assistant. Tell me where I can help you")
 
 if __name__ == '__main__':
     run()
