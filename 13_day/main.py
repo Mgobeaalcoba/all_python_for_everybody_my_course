@@ -9,8 +9,11 @@ import wikipedia
 
 def run():
     # desgrabar()
-    hablar("Hello World!!! This is my first message. I'm your own voice assistant programmed with Python. Congratulations!")
+    # hablar("Hello World!!! This is my first message. I'm your own voice assistant programmed with Python. Congratulations!")
     # distintas_voces()
+    # pedir_dia()
+    saludo_inicial()
+    pedir_hora()
 
 # Escucha nuestro micrófono y devuelve el audio como texto - desgrabar:
 def desgrabar():
@@ -73,6 +76,7 @@ def hablar(mensaje):
     engine.say(mensaje)
     engine.runAndWait()
 
+# Identificar las distintas voces que tengo en mi os y devolver alguna de ellas.
 def distintas_voces() -> str:
     engine = pyttsx3.init()
 
@@ -84,6 +88,47 @@ def distintas_voces() -> str:
     id1 = 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_EN-US_ZIRA_11.0'
 
     return id1
+
+# Informar el día de la semana
+def pedir_dia():
+    # Crear la variable con datos de hoy:
+    dia = datetime.date.today()
+    print(dia)
+
+    # Diccionario para poder obtener el nombre del día
+    dias = {
+        "0": "Monday",
+        "1": "Tuesday",
+        "2": "Wednesday",
+        "3": "Thursday",
+        "4": "Friday",
+        "5": "Saturday",
+        "6": "Sunday",
+    }
+
+    # Crear una variable para el día de la semana
+    dia_semana = str(dia.weekday())
+    print(dias[dia_semana])
+
+    # Le pido a mi asistente que me diga el día y la fecha
+    hablar(f"Today is {dias[dia_semana]} and the date is {dia}. Good day Marian!")
+
+# Informar que hora es
+def pedir_hora():
+    # Crea una variable con datos de la hora
+    hora = datetime.datetime.now()
+    hora = f"In this moment is the hour {hora.hour} with {hora.minute} minutes and {hora.second} seconds. There is still one day ahead"
+    print(hora)
+
+    # Decir la hora
+    hablar(hora)
+
+# Saludo inicial
+def saludo_inicial():
+    # Decir el saludo!
+    hablar("Hello, I'm Ada, your personal assistant. Tell me where I can help you")
+
+
 
 if __name__ == '__main__':
     run()
