@@ -8,15 +8,91 @@ import datetime
 import wikipedia
 
 def run():
-    # desgrabar()
-    # hablar("Hello World!!! This is my first message. I'm your own voice assistant programmed with Python. Congratulations!")
-    # distintas_voces()
-    # pedir_dia()
+    centro_de_pedidos()
+
+# Función central del asistente de voz: El centro de pedidos:
+def centro_de_pedidos():
+    # Activa el saludo inicial
     saludo_inicial()
-    pedir_hora()
+
+    # Abre un ciclo while para que el programe espere indicaciones hasta que le pidamos terminar:
+    ## Variable de corte:
+    repetir_ciclo = True
+
+    while repetir_ciclo:
+        # Activar el micro y guardar el pedido en un string:
+        pedido: str = desgrabar().lower()
+
+        if 'open youtube' in pedido:
+            hablar("Of course! I'm open Youtube for you.")
+            webbrowser.open("https://www.youtube.com/")
+            continue # Para que continue con el loop
+        elif 'open navigator' in pedido:
+            hablar("Clear. I'm on it. You wait a second please!")
+            webbrowser.open("https://www.google.com/")
+            continue
+        elif 'what day is today' in pedido:
+            pedir_dia()
+            continue
+        elif 'what hour is now' in pedido:
+            pedir_hora()
+            continue
+        elif 'search in wikipedia' in pedido:
+            hablar("I'm going to search that in wikipedia right now!")
+            pedido = pedido.replace('search in wikipedia', '')
+            # wikipedia.set_lang('es') # Para buscar en wikipedia en español
+            resultado = wikipedia.summary(pedido, sentences=1) # Solo lee el primer párrafo de lo encontrado en wikipedia
+            hablar('Wikipedia say the following...')
+            hablar(resultado)
+            continue
+        elif 'search in internet' in pedido:
+            hablar("Right now! I'm on it")
+            pedido = pedido.replace("search in internet", "")
+            pywhatkit.search(pedido)
+            hablar("This is what i have been find")
+            continue
+        elif 'play' in pedido:
+            hablar("Good idea, I'm already starting to play it")
+            pedido = pedido.replace("play", "")
+            pywhatkit.playonyt(pedido)
+            continue
+        elif 'joke' in pedido:
+            hablar("Ok! Do you need a joke? Sure Marian. Here you have a joke...")
+            joke = pyjokes.get_joke('en') # "es" si las querés en español
+            hablar(joke)
+            print(joke)
+            continue
+        elif 'stock price' in pedido:
+            hablar("Sure Marian! Wait for me a few minutes please.")
+            accion = pedido.split('of')[-1].strip().lower() # Último objeto para identificar acciones de quien quiero info. strip() elimina los espacios en blanco que pudiesen haber.
+            cartera = {
+                'apple': 'APPL',
+                'amazon': 'AMZN',
+                'mercado libre': 'MELI',
+                'google': 'GOOGL',
+                'telefonica': 'TEF',
+                'repsol': 'REP',
+            }
+            try:
+                accion_buscada = cartera[accion]
+                print(accion)
+                print(accion_buscada)
+                accion_buscada = yf.Ticker(accion_buscada)
+                precio_actual = accion_buscada.info['regularMarketPrice']
+                hablar(f"I found it. The stock price of {accion} is {precio_actual}!!!")
+                continue
+            except:
+                hablar("Sorry but i didn't find that stock. Retry more later please!")
+                continue
+        elif 'goodbye' in pedido:
+            repetir_ciclo = False
+            despedida()
+            continue
+
+
 
 # Escucha nuestro micrófono y devuelve el audio como texto - desgrabar:
-def desgrabar():
+def desgrabar() -> str:
     # almacenar el recognizer en variable
     r = sr.Recognizer()
 
@@ -33,7 +109,7 @@ def desgrabar():
 
         try:
             # Buscar en google lo que haya escuchado
-            pedido = r.recognize_google(audio, language="es-ar")
+            pedido = r.recognize_google(audio, language="en")
 
             # Prueba de que pudo ingresar y transformar nuestra vos:
             print("Dijiste: " + pedido)
@@ -138,6 +214,12 @@ def saludo_inicial():
 
     # Decir el saludo!
     hablar(f"Hello, {greetings}, I'm Ada, your personal assistant. Tell me where I can help you")
+
+# Mensaje de despedida de ada:
+def despedida():
+    hablar("Good bye Marian!!! Have a wonderful day. See you soon!!!")
+
+
 
 if __name__ == '__main__':
     run()
