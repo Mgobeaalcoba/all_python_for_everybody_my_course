@@ -7,8 +7,10 @@ import webbrowser
 import datetime
 import wikipedia
 
+
 def run():
     centro_de_pedidos()
+
 
 # Función central del asistente de voz: El centro de pedidos:
 def centro_de_pedidos():
@@ -26,7 +28,7 @@ def centro_de_pedidos():
         if 'open youtube' in pedido:
             hablar("Of course! I'm open Youtube for you.")
             webbrowser.open("https://www.youtube.com/")
-            continue # Para que continue con el loop
+            continue  # Para que continue con el loop
         elif 'open navigator' in pedido:
             hablar("Clear. I'm on it. You wait a second please!")
             webbrowser.open("https://www.google.com/")
@@ -41,7 +43,8 @@ def centro_de_pedidos():
             hablar("I'm going to search that in wikipedia right now!")
             pedido = pedido.replace('search in wikipedia', '')
             # wikipedia.set_lang('es') # Para buscar en wikipedia en español
-            resultado = wikipedia.summary(pedido, sentences=1) # Solo lee el primer párrafo de lo encontrado en wikipedia
+            resultado = wikipedia.summary(pedido,
+                                          sentences=1)  # Solo lee el primer párrafo de lo encontrado en wikipedia
             hablar('Wikipedia say the following...')
             hablar(resultado)
             continue
@@ -58,13 +61,14 @@ def centro_de_pedidos():
             continue
         elif 'joke' in pedido:
             hablar("Ok! Do you need a joke? Sure Marian. Here you have a joke...")
-            joke = pyjokes.get_joke('en') # "es" si las querés en español
+            joke = pyjokes.get_joke('en')  # "es" si las querés en español
             hablar(joke)
             print(joke)
             continue
         elif 'stock price' in pedido:
             hablar("Sure Marian! Wait for me a few minutes please.")
-            accion = pedido.split('of')[-1].strip().lower() # Último objeto para identificar acciones de quien quiero info. strip() elimina los espacios en blanco que pudiesen haber.
+            accion = pedido.split('of')[
+                -1].strip().lower()  # Último objeto para identificar acciones de quien quiero info. strip() elimina los espacios en blanco que pudiesen haber.
             cartera = {
                 'apple': 'APPL',
                 'amazon': 'AMZN',
@@ -90,7 +94,6 @@ def centro_de_pedidos():
             continue
 
 
-
 # Escucha nuestro micrófono y devuelve el audio como texto - desgrabar:
 def desgrabar() -> str:
     # almacenar el recognizer en variable
@@ -99,7 +102,7 @@ def desgrabar() -> str:
     # configuramos el micrófono
     with sr.Microphone() as origen:
         # Tiempo de espera desde que se active el micrófono
-        r.pause_threshold = 0.8 # menos de 1 segundo
+        r.pause_threshold = 0.8  # menos de 1 segundo
 
         # Informar que comenzó la grabación para saber que ya comenzó
         print("Ya puedes hablar!")
@@ -116,7 +119,7 @@ def desgrabar() -> str:
 
             # Devolver pedido
             return pedido
-        
+
         # En caso de que no pueda hacer la función dado que no comprende el audio
         except sr.UnknownValueError:
             # Prueba de que no comprendió el audio
@@ -124,7 +127,7 @@ def desgrabar() -> str:
 
             # Devolver error
             return "sigo esperando"
-        
+
         # En caso de no resolver el pedido
         except sr.RequestError:
             # Prueba de que no comprendió el audio
@@ -132,7 +135,7 @@ def desgrabar() -> str:
 
             # Devolver error
             return "sigo esperando"
-        
+
         except:
             # Prueba de que no comprendió el audio
             print("Upss, algo ha salido mal")
@@ -140,10 +143,11 @@ def desgrabar() -> str:
             # Devolver error
             return "sigo esperando"
 
+
 # Transformar la respuesta de nuestro asistente (por ahora en texto) a una voz humana
 def hablar(mensaje):
     # Encender el motor de pyttsx3
-    engine = pyttsx3.init() # Inicio el motor
+    engine = pyttsx3.init()  # Inicio el motor
 
     # Seteo el idioma que deseo usar para mi asistente de voz:
     engine.setProperty('voice', distintas_voces())
@@ -152,19 +156,21 @@ def hablar(mensaje):
     engine.say(mensaje)
     engine.runAndWait()
 
+
 # Identificar las distintas voces que tengo en mi os y devolver alguna de ellas.
 def distintas_voces() -> str:
-    engine = pyttsx3.init()
+    # engine = pyttsx3.init()
 
     # Devuelve las voces disponibles en mi sistema operativo:
-    for voice in engine.getProperty('voices'):
-        print(voice)
+    # for voice in engine.getProperty('voices'):
+    #     print(voice)
 
     # Guardo los id's en variables para luego poder usarlos si fuese necesario:
     id1 = 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_EN-US_ZIRA_11.0'
     id2 = 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_ES-MX_SABINA_11.0'
 
     return id1
+
 
 # Informar el día de la semana
 def pedir_dia():
@@ -190,6 +196,7 @@ def pedir_dia():
     # Le pido a mi asistente que me diga el día y la fecha
     hablar(f"Today is {dias[dia_semana]} and the date is {dia}. Good day Marian!")
 
+
 # Informar que hora es
 def pedir_hora():
     # Crea una variable con datos de la hora
@@ -199,6 +206,7 @@ def pedir_hora():
 
     # Decir la hora
     hablar(hora)
+
 
 # Saludo inicial
 def saludo_inicial():
@@ -216,10 +224,10 @@ def saludo_inicial():
     # Decir el saludo!
     hablar(f"Hello, {greetings}, I'm Ada, your personal assistant. Tell me where I can help you")
 
+
 # Mensaje de despedida de ada:
 def despedida():
     hablar("Good bye Marian!!! Have a wonderful day. See you soon!!!")
-
 
 
 if __name__ == '__main__':
