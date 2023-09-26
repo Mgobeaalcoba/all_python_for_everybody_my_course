@@ -17,7 +17,7 @@ lugar_cara_A = fr.face_locations(foto_control)[0] # Siempre es necesario aclarar
 lugar_cara_B = fr.face_locations(foto_prueba)[0]
 lugar_cara_C = fr.face_locations(foto_prueba_2)[0]
 
-# Codificamos la cara encontrada:
+# Codificamos la foto:
 cara_codificada_A = fr.face_encodings(foto_control)[0]
 cara_codificada_B = fr.face_encodings(foto_prueba)[0]
 cara_codificada_C = fr.face_encodings(foto_prueba_2)[0]
