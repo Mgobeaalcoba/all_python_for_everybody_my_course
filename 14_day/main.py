@@ -1,4 +1,5 @@
 from pathlib import Path
+from datetime import datetime
 import cv2
 import face_recognition as fr
 import os
@@ -11,6 +12,21 @@ mis_posiciones_de_caras = []
 mis_caras_codificadas = [] # lista que importa
 nombres_empleados = []
 lista_empleados = os.listdir(ruta) # Traera los nombres de mis archivos...
+
+def registrar_ingresos(persona):
+    # Guardamos en un csv los registros con sus horarios
+    with open("registro.csv", "r+") as f: # Modo de lectura extra que permite insertar
+        datos = f.readlines()
+        nombres_registro = []
+        for linea in datos:
+            ingreso = linea.split(",")
+            nombres_registro.append(ingreso[0]) # Agrego los nombres a mi lista
+
+        if persona not in nombres_registro:
+            ahora = datetime.now()
+            string_ahora = ahora.strftime('%H:%M:%S') # Formato de hora para registrar
+            f.writelines(f'\n{persona},{string_ahora}')
+
 
 for empleado in lista_empleados:
 
@@ -74,6 +90,11 @@ else:
         print(posicion_cara)
         # Mostrar nombre del empleado
         nombre = nombres_empleados[indice_coincidencia]
+
+        # Registro el ingreso en mi csv.
+        if nombre:
+            registrar_ingresos(nombre)
+
         print(nombre)
 
         # Dibujar los rectangulos en las imagenes a mostrar
