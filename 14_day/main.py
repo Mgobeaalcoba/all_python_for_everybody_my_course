@@ -71,9 +71,23 @@ else:
             print("No hay coincidencias")
 
     try:
+        print(posicion_cara)
         # Mostrar nombre del empleado
         nombre = nombres_empleados[indice_coincidencia]
         print(nombre)
+
+        # Dibujar los rectangulos en las imagenes a mostrar
+        cv2.rectangle(mis_imagenes[indice_coincidencia],
+                      (mis_posiciones_de_caras[indice_coincidencia][3], mis_posiciones_de_caras[indice_coincidencia][0]),  # Vértice superior izquierdo
+                      (mis_posiciones_de_caras[indice_coincidencia][1], mis_posiciones_de_caras[indice_coincidencia][2]),  # Vértice inferior derecho
+                      (0, 255, 0),  # Color en RGB para el rectángulo
+                      2)  # Grosor del rectángulo
+
+        cv2.rectangle(imagen,
+                      (posicion_cara[0][3], posicion_cara[0][0]),  # Vértice superior izquierdo
+                      (posicion_cara[0][1], posicion_cara[0][2]),  # Vértice inferior derecho
+                      (0, 255, 0),  # Color en RGB para el rectángulo
+                      2)  # Grosor del rectángulo
 
         # Mostrar resultado:
         cv2.putText(img=mis_imagenes[indice_coincidencia],
@@ -84,13 +98,23 @@ else:
                     color=(0, 255, 0),
                     thickness=2)
 
+        # Mostrar resultado:
+        cv2.putText(img=imagen,
+                    text=f"{coincidencias[indice_coincidencia]} {distancias[indice_coincidencia]}",
+                    org=(50, 50),
+                    fontFace=cv2.FONT_HERSHEY_COMPLEX,
+                    fontScale=1,
+                    color=(0, 255, 0),
+                    thickness=2)
+
         # Mostrar imágenes:
-        cv2.imshow("Foto Control", mis_imagenes[indice_coincidencia])
+        cv2.imshow("Foto Base de datos", mis_imagenes[indice_coincidencia])
+        cv2.imshow("Foto Control", imagen)
 
         # Mantener el programa abierto:
         cv2.waitKey()  # Lo mismo que input()
     except:
-        print("No hubo coincidencias encontradas!")
+        print("No se han encontrado coincidencias en nuestra base de datos")
 
 
 
