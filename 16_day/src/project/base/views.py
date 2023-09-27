@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.urls import reverse_lazy
 from .models import Tarea
 
@@ -27,3 +27,10 @@ class CrearTarea(CreateView):
     model = Tarea
     fields = '__all__' # Le estamos indicando que queremos renderizar todos los campos.
     success_url = reverse_lazy('tareas') # le paso el nombre de nuestra url que es la principal para que redirija
+
+class EditarTarea(UpdateView):
+    # No necesita un template nuevo dado que utiliza el mismo que ya tenemos para CrearTarea.
+    # También carga la info que la tarea tiene en cada uno de sus campos/atributos
+    model = Tarea
+    fields = '__all__'
+    success_url = reverse_lazy('tareas')
