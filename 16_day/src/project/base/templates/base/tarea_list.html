@@ -23,6 +23,7 @@
                 <!-- Enlace a la vista de detalle de cada id -->
                 <td><a href="{% url 'tarea' tarea.id %}">Ver</a></td>
                 <td><a href="{% url 'editar-tarea' tarea.id %}">Editar</a></td>
+                <td><a href="{% url 'eliminar-tarea' tarea.id %}">Eliminar</a></td>
             </tr>
             <!-- Si está vacia la lista de tarea entonces corre el bloque empty -->
             {% empty %}
