@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView
+from django.urls import reverse_lazy
 from .models import Tarea
 
 # Tipo de pagina que representa una lista de objetos
@@ -18,3 +20,11 @@ class DetalleTarea(DetailView):
     model = Tarea
     context_object_name = 'tarea'
     template_name = 'base/tarea.html' # Cambio el nombre por default que va a buscar Django para renderizar
+
+# Con la clase CreateView le damos la posibilidad al usuario de crear nuevos elementos en las listas:
+class CrearTarea(CreateView):
+    # Create View tomará la clase que pasemos como Modelo y creará un formulario basado en los campos que tiene nuestra clase modelo
+    model = Tarea
+    fields = '__all__' # Le estamos indicando que queremos renderizar todos los campos.
+    success_url = reverse_lazy('tareas') # le paso el nombre de nuestra url que es la principal para que redirija
+    context_object_name = 'postform'
