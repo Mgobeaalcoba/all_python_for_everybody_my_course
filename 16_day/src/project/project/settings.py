@@ -55,7 +55,9 @@ ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            'C:\\Users\\mgobea\\Documents\\develop\\python_total\\16_day\\src\\project\\base\\templates'
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

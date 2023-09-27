@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lista de Pendientes</title>
+</head>
+<body>
+    <h1>Lista de Pendientes</h1>
+    <table>
+        <tr>
+            <th>Elementos</th>
+        </tr>
+        <!-- Usamos jinja para programar el renderizado de mis tareas -->
+        {% for tarea in tareas %}
+            <tr>
+                <td>{{ tarea.titulo }}</td>
+            </tr>
+            <!-- Si está vacia la lista de tarea entonces corre el bloque empty -->
+            {% empty %}
+            <h3>No hay elementos en esta lista</h3>
+        {% endfor %}
+    </table>
+</body>
+</html>
