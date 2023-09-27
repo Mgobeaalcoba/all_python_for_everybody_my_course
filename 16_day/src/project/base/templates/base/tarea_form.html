@@ -9,5 +9,11 @@
 </head>
 <body>
     <h1>Formulario de Tareas</h1>
+    <form method="POST" action="">
+        <!-- Prevenimos antes el csrf: problema de seguridad -->
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Enviar">
+    </form>
 </body>
 </html>

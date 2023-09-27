@@ -27,4 +27,3 @@ class CrearTarea(CreateView):
     model = Tarea
     fields = '__all__' # Le estamos indicando que queremos renderizar todos los campos.
     success_url = reverse_lazy('tareas') # le paso el nombre de nuestra url que es la principal para que redirija
-    context_object_name = 'postform'

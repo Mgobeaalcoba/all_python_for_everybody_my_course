@@ -5,7 +5,7 @@ from .views import ListaPendientes, DetalleTarea, CrearTarea
 # debo traerlas .as_view()
 
 urlpatterns = [
-    path('', ListaPendientes.as_view(), name='pendientes'), # Si voy a agregar un dominio lo debo hacer con nombre/
+    path('', ListaPendientes.as_view(), name='tareas'), # Si voy a agregar un dominio lo debo hacer con nombre/
     path('tarea/<int:pk>', DetalleTarea.as_view(), name='tarea'),
     path('crear-tarea/', CrearTarea.as_view(), name='crear-tarea'),
 ]
