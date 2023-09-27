@@ -12,11 +12,14 @@
     <table>
         <tr>
             <th>Elementos</th>
+            <th></th>
         </tr>
         <!-- Usamos jinja para programar el renderizado de mis tareas -->
         {% for tarea in tareas %}
             <tr>
                 <td>{{ tarea.titulo }}</td>
+                <!-- Enlace a la vista de detalle de cada id -->
+                <td><a href="{% url 'tarea' tarea.id %}">Ver</a></td>
             </tr>
             <!-- Si está vacia la lista de tarea entonces corre el bloque empty -->
             {% empty %}
