@@ -11,14 +11,18 @@
 <body>
     {% extends 'base/principal.html' %}
     {% block content %}
-        <h1>Formulario de Tareas</h1>
-        <a href="{% url 'tareas' %}">Volver</a>
-        <form method="POST" action="">
-            <!-- Prevenimos antes el csrf: problema de seguridad -->
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Enviar">
-        </form>
+        <div class="barra-superior">
+            <a href="{% url 'tareas' %}">&#x1F860;</a>
+        </div>
+
+        <div class="cuerpo-tarjeta">
+            <form method="POST" action="">
+                <!-- Prevenimos antes el csrf: problema de seguridad -->
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input class="boton" type="submit" value="Enviar">
+            </form>
+        </div>
     {% endblock content %}
 </body>
 </html>

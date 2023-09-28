@@ -10,14 +10,18 @@
 <body>
     {% extends 'base/principal.html' %}
     {% block content %}
-        <h1>Ingresar</h1>
-        <form method="post">
-            {% csrf_token %}
-            <!-- con "form" automaticamente va a entender django que se trata de nuestra view llamada "Logueo" -->
-            {{ form.as_p }}
-            <input type="submit" value="Ingresar">
-        </form>
-        <p>No tienes una cuenta? <a href="{% url 'registro' %}">Registrate</a></p>
+        <div class="barra-superior">
+            <h1>Ingresar</h1>
+        </div>
+        <div class="cuerpo-tarjeta">
+            <form method="post">
+                {% csrf_token %}
+                <!-- con "form" automaticamente va a entender django que se trata de nuestra view llamada "Logueo" -->
+                {{ form.as_p }}
+                <input type="submit" value="Ingresar">
+            </form>
+            <p>No tienes una cuenta? <a href="{% url 'registro' %}">Registrate</a></p>
+        </div>
     {% endblock content %}
 </body>
 </html>

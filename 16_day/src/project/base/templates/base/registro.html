@@ -10,13 +10,22 @@
 <body>
     {% extends 'base/principal.html' %}
     {% block content %}
-        <h1>Registrarse</h1>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Registrar">
-        </form>
-        <p>Ya tienen una cuenta? <a href="{% url 'login' %}">Ingresa</a></p>
+        <div class="barra-superior">
+            <h1>Registrarse</h1>
+        </div>
+        <div class="cuerpo-tarjeta">
+            <form method="post">
+                {% csrf_token %}
+                <label>{{ form.username.label }}</label>
+                    {{ form.username }}
+                <label>{{ form.password1.label }}</label>
+                    {{ form.password1 }}
+                <label>{{ form.password2.label }}</label>
+                    {{ form.password2 }}
+                <input class="boton" type="submit" value="Registrar" style="margin-top:12px;">
+            </form>
+            <p>Ya tienen una cuenta? <a href="{% url 'login' %}">Ingresa</a></p>
+        </div>
     {% endblock content %}
 </body>
 </html>

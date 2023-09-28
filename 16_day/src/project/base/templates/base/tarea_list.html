@@ -10,42 +10,56 @@
 <body>
     {% extends 'base/principal.html' %}
     {% block content %}
-        {% if request.user.is_authenticated %}
-            <p>{{ request.user }}</p>
-            <a href="{% url 'logout' %}">Salir</a>
-        {% else %}
-            <a href="{% url 'login' %}">Ingresar</a>
-        {% endif %}
-        <!-- hr solo genera una linea o barra en nuestra pantalla -->
-        <hr>
-        <h1>Lista de Pendientes</h1>
-        <a href="{% url 'crear-tarea' %}">Crear Nueva Tarea</a>
+        <div class="barra-superior">
+            <div>
+                <!-- |title se usa para que aparezca la primera letra en mayúscula -->
+                <h1>Hola {{ request.user|title }}</h1>
+                <!-- La etiqueta <i> es para encerrar lo que queremos que aparezca en cursiva -->
+                <!-- count|pluralize hace plural la palabra a su izquierda si el count es mayor a 1 -->
+                <h3 style="margin:0">Tienes <i>{{ count }}</i> tarea{{ count|pluralize }} incompleta{{ count|pluralize }}</h3>
+            </div>
+            {% if request.user.is_authenticated %}
+                <a href="{% url 'logout' %}">Salir</a>
+            {% else %}
+                <a href="{% url 'login' %}">Ingresar</a>
+            {% endif %}
+        </div>
 
-        <!-- Form para poder buscar y filtrar un elemento -->
-        <form method="get" action="">
-            <input type="text" name="area-buscar" value="{{ valor_buscado }}">
-            <input type="submit" value="Buscar">
-        </form>
+        <div id="envoltorio-agregar-buscar">
+            <!-- Form para poder buscar y filtrar un elemento -->
+            <form method="get" action="" style="margin-top: 8px; display: flex;">
+                <input type="text" name="area-buscar" value="{{ valor_buscado }}">
+                <input class="boton" type="submit" value="Buscar">
+            </form>
 
-        <table>
-            <tr>
-                <th>Elementos</th>
-                <th></th>
-                <th></th>
-            </tr>
+            <a id="enlace-agregar" href="{% url 'crear-tarea' %}">&#x271A;</a>
+        </div>
+
+        <div class="envoltorio-items-tarea">
             <!-- Usamos jinja para programar el renderizado de mis tareas -->
             {% for tarea in tareas %}
-                <tr>
-                    <td>{{ tarea.titulo }}</td>
-                    <!-- Enlace a la vista de detalle de cada id -->
-                    <td><a href="{% url 'editar-tarea' tarea.id %}">Editar</a></td>
-                    <td><a href="{% url 'eliminar-tarea' tarea.id %}">Eliminar</a></td>
-                </tr>
-                <!-- Si está vacia la lista de tarea entonces corre el bloque empty -->
-                {% empty %}
-                <h3>No hay elementos en esta lista</h3>
+            <div class="envoltorio-tarea">
+                {% if tarea.completo %}
+                    <div class="titulo-tarea">
+                        <div class="icono-tarea-completa"></div>
+                        <!-- La etiqueta <s> se usa para que esté tachada las palabras encerradas dentro -->
+                        <i><s><a href="{% url 'editar-tarea' tarea.id %}">{{ tarea }}</a></s></i>
+                    </div>
+                    <a class="enlace-eliminar" href="{% url 'eliminar-tarea' tarea.id %}">&#x2717;</a>
+                {% else %}
+                    <div class="titulo-tarea">
+                        <div class="icono-tarea-incompleta"></div>
+                        <!-- La etiqueta <s> se usa para que esté tachada las palabras encerradas dentro -->
+                        <a href="{% url 'editar-tarea' tarea.id %}">{{ tarea }}</a>
+                    </div>
+                    <a class="enlace-eliminar" href="{% url 'eliminar-tarea' tarea.id %}">&#x2717;</a>
+                {% endif %}
+            </div>
+            <!-- Si está vacia la lista de tarea entonces corre el bloque empty -->
+            {% empty %}
+            <h3>No hay elementos en esta lista</h3>
             {% endfor %}
-        </table>
+        </div>
     {% endblock content %}
 </body>
 </html>

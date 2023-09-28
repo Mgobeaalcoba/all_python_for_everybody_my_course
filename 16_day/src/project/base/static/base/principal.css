@@ -19,3 +19,101 @@ h1, h2, h3, h4, h5, h6 {
 a, p {
     color: #A77A71
 }
+
+.barra-superior {
+    display: flex;
+    justify-content: space-between;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 5px 5px 0 0;
+    background: linear-gradient(90deg, #4D9FE3 0%, #3A8ACD 43%, #3A8ACD 100%);
+}
+
+.barra-superior a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+.envoltorio-tarea {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #ffffff;
+    border-top: 1px solid rgb(225,225,225)
+}
+
+.titulo-tarea{
+    display: flex;
+}
+
+.titulo-tarea a {
+    text-decoration: none;
+    color: #4B5156;
+    margin-left: 10px;
+}
+
+.icono-tarea-completa {
+    height: 20px;
+    width: 20px;
+    background-color: rgb(105, 162, 105);
+    border-radius: 50px;
+}
+
+.icono-tarea-incompleta {
+    height: 20px;
+    width: 20px;
+    background-color: rgb(218, 218, 218);
+    border-radius: 50px;
+}
+
+.enlace-eliminar {
+    text-decoration: none;
+    font-weight: 900;
+    color: #EA4220;
+    font-size: 22px;
+    line-height: 0;
+}
+
+#envoltorio-agregar-buscar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+#enlace-agregar{
+    color: #EA4220;
+    text-decoration: none;
+    font-size: 42px;
+    text-shadow: 1px 1px #81413B;
+}
+
+input[type=text],
+input[type=password],
+textarea {
+    border: 1px solid #EB796F;
+    border-radius: 5px;
+    padding: 10px;
+    width: 90%;
+}
+
+label {
+    padding-top: 10px !important;
+    display: block;
+}
+
+.boton {
+    border: 1px solid #EB796F;
+    background-color: #FAFAFA;
+    color: #EB796F;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.cuerpo-tarjeta {
+    padding: 20px;
+}
