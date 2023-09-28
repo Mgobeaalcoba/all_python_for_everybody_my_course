@@ -8,12 +8,15 @@
     <title>Registro</title>
 </head>
 <body>
-    <h1>Registrarse</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Registrar">
-    </form>
-    <p>Ya tienen una cuenta? <a href="{% url 'login' %}">Ingresa</a></p>
+    {% extends 'base/principal.html' %}
+    {% block content %}
+        <h1>Registrarse</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Registrar">
+        </form>
+        <p>Ya tienen una cuenta? <a href="{% url 'login' %}">Ingresa</a></p>
+    {% endblock content %}
 </body>
 </html>

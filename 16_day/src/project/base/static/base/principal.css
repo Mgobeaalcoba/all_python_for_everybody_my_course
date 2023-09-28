@@ -1,0 +1,21 @@
+body {
+    background-color: #EBDDDA;
+    font-family: 'Abel', sans-serif;
+    padding-top: 60px;
+}
+
+.container {
+    max-width: 550px;
+    margin: auto;
+    background-color: #EDEBEA;
+    -webkit-box-shadow: 2px 2px 13px -4px rgba(0,0,0,0.21);
+    box-shadow: 2px 2px 13px -4px rgba(0,0,0,0.21);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Lato', sans-serif;
+}
+
+a, p {
+    color: #A77A71
+}

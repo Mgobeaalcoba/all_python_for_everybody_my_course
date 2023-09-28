@@ -8,42 +8,44 @@
     <title>Lista de Pendientes</title>
 </head>
 <body>
-    {% if request.user.is_authenticated %}
-        <p>{{ request.user }}</p>
-        <a href="{% url 'logout' %}">Salir</a>
-    {% else %}
-        <a href="{% url 'login' %}">Ingresar</a>
-    {% endif %}
-    <!-- hr solo genera una linea o barra en nuestra pantalla -->
-    <hr>
-    <h1>Lista de Pendientes</h1>
-    <a href="{% url 'crear-tarea' %}">Crear Nueva Tarea</a>
-    
-    <!-- Form para poder buscar y filtrar un elemento -->
-    <form method="get" action="">
-        <input type="text" name="area-buscar" value="{{ valor_buscado }}">
-        <input type="submit" value="Buscar">
-    </form>
-    
-    <table>
-        <tr>
-            <th>Elementos</th>
-            <th></th>
-            <th></th>
-        </tr>
-        <!-- Usamos jinja para programar el renderizado de mis tareas -->
-        {% for tarea in tareas %}
+    {% extends 'base/principal.html' %}
+    {% block content %}
+        {% if request.user.is_authenticated %}
+            <p>{{ request.user }}</p>
+            <a href="{% url 'logout' %}">Salir</a>
+        {% else %}
+            <a href="{% url 'login' %}">Ingresar</a>
+        {% endif %}
+        <!-- hr solo genera una linea o barra en nuestra pantalla -->
+        <hr>
+        <h1>Lista de Pendientes</h1>
+        <a href="{% url 'crear-tarea' %}">Crear Nueva Tarea</a>
+
+        <!-- Form para poder buscar y filtrar un elemento -->
+        <form method="get" action="">
+            <input type="text" name="area-buscar" value="{{ valor_buscado }}">
+            <input type="submit" value="Buscar">
+        </form>
+
+        <table>
             <tr>
-                <td>{{ tarea.titulo }}</td>
-                <!-- Enlace a la vista de detalle de cada id -->
-                <td><a href="{% url 'tarea' tarea.id %}">Ver</a></td>
-                <td><a href="{% url 'editar-tarea' tarea.id %}">Editar</a></td>
-                <td><a href="{% url 'eliminar-tarea' tarea.id %}">Eliminar</a></td>
+                <th>Elementos</th>
+                <th></th>
+                <th></th>
             </tr>
-            <!-- Si está vacia la lista de tarea entonces corre el bloque empty -->
-            {% empty %}
-            <h3>No hay elementos en esta lista</h3>
-        {% endfor %}
-    </table>
+            <!-- Usamos jinja para programar el renderizado de mis tareas -->
+            {% for tarea in tareas %}
+                <tr>
+                    <td>{{ tarea.titulo }}</td>
+                    <!-- Enlace a la vista de detalle de cada id -->
+                    <td><a href="{% url 'editar-tarea' tarea.id %}">Editar</a></td>
+                    <td><a href="{% url 'eliminar-tarea' tarea.id %}">Eliminar</a></td>
+                </tr>
+                <!-- Si está vacia la lista de tarea entonces corre el bloque empty -->
+                {% empty %}
+                <h3>No hay elementos en esta lista</h3>
+            {% endfor %}
+        </table>
+    {% endblock content %}
 </body>
 </html>
