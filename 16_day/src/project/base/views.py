@@ -3,6 +3,8 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.views import LoginView
+# LoginRequiredMixin no se hereda en una nueva clase sino en clases ya existentes:
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .models import Tarea
 
@@ -25,30 +27,30 @@ class Logueo(LoginView):
         de tareas """
         return reverse_lazy('tareas')
 
-class ListaPendientes(ListView):
+class ListaPendientes(LoginRequiredMixin, ListView):
     model = Tarea
     context_object_name = 'tareas' # Con este nombre llamo a mi ListaPendientes en mi template HTML
 
-class DetalleTarea(DetailView):
+class DetalleTarea(LoginRequiredMixin, DetailView):
     model = Tarea
     context_object_name = 'tarea'
     template_name = 'base/tarea.html' # Cambio el nombre por default que va a buscar Django para renderizar
 
 # Con la clase CreateView le damos la posibilidad al usuario de crear nuevos elementos en las listas:
-class CrearTarea(CreateView):
+class CrearTarea(LoginRequiredMixin, CreateView):
     # Create View tomará la clase que pasemos como Modelo y creará un formulario basado en los campos que tiene nuestra clase modelo
     model = Tarea
     fields = '__all__' # Le estamos indicando que queremos renderizar todos los campos.
     success_url = reverse_lazy('tareas') # le paso el nombre de nuestra url que es la principal para que redirija
 
-class EditarTarea(UpdateView):
+class EditarTarea(LoginRequiredMixin, UpdateView):
     # No necesita un template nuevo dado que utiliza el mismo que ya tenemos para CrearTarea.
     # También carga la info que la tarea tiene en cada uno de sus campos/atributos
     model = Tarea
     fields = '__all__'
     success_url = reverse_lazy('tareas')
 
-class EliminarTarea(DeleteView):
+class EliminarTarea(LoginRequiredMixin, DeleteView):
     model = Tarea
     context_object_name = 'tarea'
     success_url = reverse_lazy('tareas')
