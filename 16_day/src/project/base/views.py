@@ -1,7 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+# FormView, UserCreationForm y la función login son las necesarias para crear un nuevo usuario desde nuestra Web App
+from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
 from django.contrib.auth.views import LoginView
 # LoginRequiredMixin no se hereda en una nueva clase sino en clases ya existentes:
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -26,6 +29,25 @@ class Logueo(LoginView):
         se lo redirigirá directamente a la pagina
         de tareas """
         return reverse_lazy('tareas')
+
+class PaginaRegistro(FormView):
+    template_name = 'base/registro.html'
+    form_class = UserCreationForm
+    redirect_authenticated_user = True
+    success_url = reverse_lazy('tareas')
+
+    # Sobreescribimos un método para que el usuario ya quede logueado luego del registro:
+    def form_valid(self, form):
+        usuario = form.save()
+        if usuario is not None:
+            login(self.request, usuario)
+        return super(PaginaRegistro, self).form_valid(form)
+
+    # Sobreescribo el método "get" para que funcione el redireccionamiento en el caso de querer ir a "registrarse" estando logueado
+    def get(self, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            return redirect('tareas')
+        return super(PaginaRegistro, self).get(*args, **kwargs)
 
 class ListaPendientes(LoginRequiredMixin, ListView):
     model = Tarea
