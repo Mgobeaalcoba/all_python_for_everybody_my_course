@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 from .models import Tarea
 
@@ -12,6 +13,18 @@ from .models import Tarea
 # Y tengo que tener tareas en mi base de datos que las voy a cargar vía Django Admin
 
 # Las vistas pueden ser funciones o clases. Si usamos templates de Django deben ser clases:
+
+class Logueo(LoginView):
+    template_name = "base/login.html"
+    field = '__all__'
+    redirect_authenticated_user = True
+
+    def get_success_url(self):
+        """ Cuando el usuario esté logueado
+        se lo redirigirá directamente a la pagina
+        de tareas """
+        return reverse_lazy('tareas')
+
 class ListaPendientes(ListView):
     model = Tarea
     context_object_name = 'tareas' # Con este nombre llamo a mi ListaPendientes en mi template HTML

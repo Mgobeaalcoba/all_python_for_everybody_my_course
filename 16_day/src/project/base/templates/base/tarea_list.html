@@ -10,9 +10,9 @@
 <body>
     {% if request.user.is_authenticated %}
         <p>{{ request.user }}</p>
-        <a href="">Salir</a>
+        <a href="{% url 'logout' %}">Salir</a>
     {% else %}
-        <a href="">Ingresar</a>
+        <a href="{% url 'login' %}">Ingresar</a>
     {% endif %}
     <!-- hr solo genera una linea o barra en nuestra pantalla -->
     <hr>
