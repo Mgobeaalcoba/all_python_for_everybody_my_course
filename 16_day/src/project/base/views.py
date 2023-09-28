@@ -31,6 +31,13 @@ class ListaPendientes(LoginRequiredMixin, ListView):
     model = Tarea
     context_object_name = 'tareas' # Con este nombre llamo a mi ListaPendientes en mi template HTML
 
+    # Sobreescribimos get_context_data para que solo nos traiga las tareas del user logueado:
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["tareas"] = context["tareas"].filter(usuario=self.request.user)
+        context["count"] = context["tareas"].filter(completo=False).count()
+        return context
+
 class DetalleTarea(LoginRequiredMixin, DetailView):
     model = Tarea
     context_object_name = 'tarea'
@@ -40,14 +47,19 @@ class DetalleTarea(LoginRequiredMixin, DetailView):
 class CrearTarea(LoginRequiredMixin, CreateView):
     # Create View tomará la clase que pasemos como Modelo y creará un formulario basado en los campos que tiene nuestra clase modelo
     model = Tarea
-    fields = '__all__' # Le estamos indicando que queremos renderizar todos los campos.
+    fields = ['titulo', 'descripcion', 'completo'] # Le estamos indicando que queremos renderizar todos los campos.
     success_url = reverse_lazy('tareas') # le paso el nombre de nuestra url que es la principal para que redirija
+
+    # Sobreescribo el método form_valid para que directamente asigne la tarea al user logueado sin preguntar:
+    def form_valid(self, form):
+        form.instance.usuario = self.request.user
+        return super(CrearTarea, self).form_valid(form)
 
 class EditarTarea(LoginRequiredMixin, UpdateView):
     # No necesita un template nuevo dado que utiliza el mismo que ya tenemos para CrearTarea.
     # También carga la info que la tarea tiene en cada uno de sus campos/atributos
     model = Tarea
-    fields = '__all__'
+    fields = ['titulo', 'descripcion', 'completo']
     success_url = reverse_lazy('tareas')
 
 class EliminarTarea(LoginRequiredMixin, DeleteView):
