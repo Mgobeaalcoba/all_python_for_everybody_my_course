@@ -8,6 +8,14 @@
     <title>Lista de Pendientes</title>
 </head>
 <body>
+    {% if request.user.is_authenticated %}
+        <p>{{ request.user }}</p>
+        <a href="">Salir</a>
+    {% else %}
+        <a href="">Ingresar</a>
+    {% endif %}
+    <!-- hr solo genera una linea o barra en nuestra pantalla -->
+    <hr>
     <h1>Lista de Pendientes</h1>
     <a href="{% url 'crear-tarea' %}">Crear Nueva Tarea</a>
     <table>
