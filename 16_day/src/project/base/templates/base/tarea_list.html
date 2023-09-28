@@ -18,6 +18,13 @@
     <hr>
     <h1>Lista de Pendientes</h1>
     <a href="{% url 'crear-tarea' %}">Crear Nueva Tarea</a>
+    
+    <!-- Form para poder buscar y filtrar un elemento -->
+    <form method="get" action="">
+        <input type="text" name="area-buscar" value="{{ valor_buscado }}">
+        <input type="submit" value="Buscar">
+    </form>
+    
     <table>
         <tr>
             <th>Elementos</th>

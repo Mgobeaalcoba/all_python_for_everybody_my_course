@@ -58,6 +58,14 @@ class ListaPendientes(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context["tareas"] = context["tareas"].filter(usuario=self.request.user)
         context["count"] = context["tareas"].filter(completo=False).count()
+
+        # Agregamos lógica para que solo muestre las tareas que el usuario mostró en la caja de texto:
+        valor_buscado = self.request.GET.get('area-buscar')
+        if valor_buscado:
+            context['tareas'] = context['tareas'].filter(titulo__icontains=valor_buscado)
+
+        context['valor_buscado'] = valor_buscado
+
         return context
 
 class DetalleTarea(LoginRequiredMixin, DetailView):
